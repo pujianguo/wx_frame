@@ -1,0 +1,18 @@
+/*
+ * @Descripttion: 时间处理相关filter
+ * @Author: pujianguo
+ * @Date: 2020-12-07 14:12:47
+ * @注意：wxs语法，不能用es6，不能引入js方法
+ */
+/**
+ * eg:
+ * <wxs src="../../wxs/date.wxs" module="dateTool" />
+ * <text>{{dateTool.day('2020-12-07')}}</text>
+ */
+var date = function(t) {
+  return getDate(t).toISOString()
+}
+
+module.exports = {
+  date: date
+}
