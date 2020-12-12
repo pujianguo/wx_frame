@@ -1,0 +1,14 @@
+<view class="list">
+  <view class="list-item" wx:for="{{list}}" wx:key="id" data-index="{{index}}"
+    bind:tap="clickItem">
+    <image class="item-image" src="{{item.imageSrc}}" mode="aspectFill"></image>
+    <view class="item-body">
+      <view class="item-title">{{item.title}}</view>
+      <view class="item-content">
+        <text class="text">{{item.size}}</text>
+        <text class="text">领取 {{item.count}}人</text>
+      </view>
+    </view>
+    <view wx:if="{{!item.hasGet}}" class="item-btn" catch:tap="clickBtn" data-index="{{index}}">免费领取</view>
+  </view>
+</view>

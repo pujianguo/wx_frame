@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/datum/datum",
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -15,11 +16,35 @@
     "pages/im/room/room"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
-    "navigationBarTextStyle": "black"
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#2AA8F4",
+    "navigationBarTitleText": "蒲建国的小程序",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#2AA8F4",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/datum/datum",
+        "text": "资料",
+        "iconPath": "images/tabs/datum.png",
+        "selectedIconPath": "images/tabs/datum_selected.png"
+      },
+      {
+        "pagePath": "pages/datum/datum",
+        "text": "课程",
+        "iconPath": "images/tabs/course.png",
+        "selectedIconPath": "images/tabs/course_selected.png"
+      },
+      {
+        "pagePath": "pages/datum/datum",
+        "text": "我的",
+        "iconPath": "images/tabs/my.png",
+        "selectedIconPath": "images/tabs/my_selected.png"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"

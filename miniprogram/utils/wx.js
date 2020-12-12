@@ -1,5 +1,5 @@
 /*
- * @Descripttion:
+ * @Descripttion: 微信API Promise转化
  * @Author: pujianguo
  * @Date: 2020-12-07 09:34:15
  */

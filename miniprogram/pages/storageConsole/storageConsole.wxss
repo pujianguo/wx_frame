@@ -1,6 +1,6 @@
 /* pages/storageConsole/storageConsole.wxss */
 
-@import "../../style/guide.wxss";
+@import "../../styles/guide.wxss";
 
 .black {
   color: black;

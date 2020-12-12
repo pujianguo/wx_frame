@@ -4,7 +4,7 @@
  * @Date: 2020-12-07 10:21:50
  */
 import config from '../config'
-import storage from './storage'
+import store from './store'
 
 // 微信API Promise化
 export const wxPromise = function(api) {
@@ -96,7 +96,7 @@ export const showRequestError = msg => {
 
 // 检测是否登录，没有登录跳到登录页面
 export const checkTokenToLogin = () => {
-  if (!storage.getToken()) {
+  if (!store.getToken()) {
     let path = config.loginPath
     let pages = getCurrentPages()
     if (pages.length) {

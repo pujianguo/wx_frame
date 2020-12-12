@@ -1,10 +1,10 @@
 /*
- * @Descripttion: 接口请求方法
+ * @Descripttion: 接口请求方法定义
  * @Author: pujianguo
  * @Date: 2020-12-07 09:38:53
  */
-import storage from '../utils/store'
-import { showRequestLoading, hideRequestLoading, showRequestError, checkTokenToLogin } from '../utils/func'
+import storage from './store'
+import { showRequestLoading, hideRequestLoading, showRequestError, checkTokenToLogin } from './func'
 import config from '../config'
 
 const httpRequest = function (url, method, data, needAuth = true, loading = true) {

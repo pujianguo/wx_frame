@@ -1,0 +1,71 @@
+<import src="datum.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{initLoading}}" />
+
+<view>
+  <view class="banner">
+    <image class="banner-image" src="/images/datum/datum_banner.png" mode="aspectFill"></image>
+  </view>
+  <view class="header">
+    <view class="header-title">资料专区</view>
+    <navigator class="header-btn" url="/pages/mydatum/mydatum" open-type="navigate" hover-class="none">我的资料</navigator>
+  </view>
+
+  <view class="menu {{menuFixed ? 'menu_fixed' : ''}}" id="menu">
+    <view class="menu-item {{currentSearchType === 'area' ? 'active' : ''}}" data-type="area" bind:tap="openSearch">
+      <text class="menu-item-title">{{queryCity.label}}</text>
+      <text class="menu-item-icon"></text>
+    </view>
+    <view class="menu-item {{currentSearchType === 'bank' ? 'active' : ''}}" data-type="bank" bind:tap="openSearch">
+      <text class="menu-item-title">{{queryBank.label}}</text>
+      <text class="menu-item-icon"></text>
+    </view>
+    <view class="menu-item {{currentSearchType === 'category' ? 'active' : ''}}" data-type="category" bind:tap="openSearch">
+      <text class="menu-item-title">{{queryCategory.label}}</text>
+      <text class="menu-item-icon"></text>
+    </view>
+  </view>
+  <view class="menu" wx:if="{{menuFixed}}">
+    <!-- 用来占位，menu变为fixed时，其他也算不会重排 -->
+  </view>
+
+  <view class="search-box-wrapper" hidden="{{!isSearch}}" catch:touchmove>
+    <view class="search-area-box" wx:if="{{currentSearchType === 'area'}}">
+      <scroll-view class="province-box" scroll-y enhanced show-scrollbar="{{false}}">
+        <view class="province-container">
+          <view class="search-province-item {{queryProvince.value === item.value ? 'active' : ''}}"
+            wx:for="{{provinceList}}" wx:key="value" data-index="{{index}}"
+            bind:tap="selectProvince">{{item.label}}</view>
+        </view>
+      </scroll-view>
+      <scroll-view class="city-box" scroll-y enhanced show-scrollbar="{{false}}">
+        <view class="city-container">
+          <view class="search-city-item {{queryCity.value === item.value ? 'active' : ''}}"
+            wx:for="{{cityList}}" wx:key="value" data-index="{{index}}"
+            bind:tap="selectCity">{{item.label}}</view>
+        </view>
+      </scroll-view>
+    </view>
+    <scroll-view wx:else class="search-category-box" scroll-y>
+      <view class="search-category-container" wx:if="{{currentSearchType === 'bank'}}">
+        <view class="search-category-item {{queryBank.value === item.value ? 'active' : ''}}"
+          wx:for="{{bankList}}" wx:key="index" data-index="{{index}}"
+          bind:tap="selectBank">{{item.label}}</view>
+      </view>
+      <view class="search-category-container" wx:elif="{{currentSearchType === 'category'}}">
+        <view class="search-category-item {{queryCategory.value === item.value ? 'active' : ''}}"
+          wx:for="{{categoryList}}" wx:key="value" data-index="{{index}}"
+          bind:tap="selectCategory">{{item.label}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <datum-list class="datum-list" list="{{list}}"></datum-list>
+
+  <!-- 分页 -->
+  <page refreshFlag="{{refreshFlag}}" loadMoreFlag="{{loadMoreFlag}}" apiObj="{{apiObj}}"
+    bind:refreshList="bindRefreshList" bind:closeInitLoading="bindCloseInitLoading"></page>
+
+  <button class="kg-normal-btn contact" hover-class="none" open-type="contact">
+    <image class="contact-image" src="/images/datum/contact_btn.png" mode="aspectFill"></image>
+  </button>
+</view>

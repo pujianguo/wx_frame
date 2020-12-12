@@ -1,8 +1,9 @@
 /*
- * @Descripttion:
+ * @Descripttion: 模拟数据接口文件
  * @Author: pujianguo
  * @Date: 2020-12-07 17:56:57
  */
+import { showRequestLoading, hideRequestLoading } from '../utils/func'
 
 export const listMockNews = params => {
   return new Promise(resolve => {
@@ -23,13 +24,42 @@ export const listMockNews = params => {
   })
 }
 
+
+export const listDatumMock = (params, loading = true) => {
+  return new Promise(resolve => {
+    loading && showRequestLoading()
+    setTimeout(() => {
+      let count = 32
+      let { offset, limit } = params
+      let list = []
+      for (let i = 0; i < limit; i++) {
+        let index = offset + i + 1
+        if (index <= count) {
+          let item = Object.assign({}, DatumData['data' + Math.floor(Math.random() * 5)])
+          item.id = index
+          list.push(item)
+        }
+      }
+      resolve({ count: count, items: list })
+      loading && hideRequestLoading()
+    }, 300)
+  })
+}
+
+
 // const newGuid = () => {
 //   let s4 = function () {
 //     return (65536 * (1 + Math.random()) | 0).toString(16).substring(1)
 //   }
 //   return (s4() + s4() + '-' + s4() + '-4' + s4().substr(0, 3) + '-' + s4() + '-' + s4() + s4() + s4()).toUpperCase()
 // }
-
+const DatumData = {
+  data0: {title: '中国银行高频考点整理', size: '121KB', count: 1053, imageSrc: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg?imageView2/3/w/200/h/100/q/90'},
+  data1: {title: '中国银行高频考点整理', size: '12MB', count: 1443, imageSrc: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg?imageView2/3/w/200/h/100/q/90'},
+  data2: {title: '中国银行高频考点整理', size: '4MB', count: 125, imageSrc: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg?imageView2/3/w/200/h/100/q/90'},
+  data3: {title: '中国银行高频考点整理', size: '123MB', count: 2543, imageSrc: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg?imageView2/3/w/200/h/100/q/90'},
+  data4: {title: '中国银行高频考点整理', size: '25KB', count: 3435444232, imageSrc: 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/images/muwu.jpg?imageView2/3/w/200/h/100/q/90'},
+}
 const newsData = {
   data0: {
     'datetime': '40分钟前',

@@ -1,0 +1,51 @@
+.sk-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #ffffff;
+  z-index: 99999;
+}
+.sk-opacity {
+  opacity: 0 !important;
+}
+.sk-transparent {
+  color: transparent !important;
+}
+.sk-text {
+  background-origin: content-box !important;
+  background-clip: content-box !important;
+  background-color: transparent !important;
+  color: transparent !important;
+  background-repeat: repeat-y !important;
+}
+.sk-button {
+  color: #EFEFEF !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.sk-pseudo::before, .sk-pseudo::after {
+  background: #EFEFEF !important;
+  background-image: none !important;
+  color: transparent !important;
+  border-color: transparent !important;
+}
+.sk-pseudo-rect::before, .sk-pseudo-rect::after {
+  border-radius: 0 !important;
+}
+.sk-pseudo-circle::before, .sk-pseudo-circle::after {
+  border-radius: 50% !important;
+}
+
+.sk-shine {
+  background-image: linear-gradient(90deg, #f2f2f2 25%, #e6e6e6 37%, #f2f2f2 63%) !important;
+  background-size: 400% 100% !important;
+  background-position: 100% 50% !important;
+  animation: sk-shine-loading 1.4s ease infinite;
+}
+@keyframes sk-shine-loading {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}

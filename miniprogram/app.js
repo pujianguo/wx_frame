@@ -1,4 +1,11 @@
 //app.js
+// 解决Promise没有finally
+Promise.prototype.finally = function (callback) {
+  return this.then(
+    value => this.constructor.resolve(callback()).then(() => value),
+    reason => this.constructor.resolve(callback()).then(() => { throw reason })
+  )
+}
 App({
   onLaunch: function () {
     if (!wx.cloud) {
