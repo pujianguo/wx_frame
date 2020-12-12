@@ -1,0 +1,18 @@
+{
+  "name": "frame",
+  "version": "1.0.0",
+  "description": "蒲建国的微信小程序基础框架",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitee.com:raul_wx/frame.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vant/weapp": "^1.6.3"
+  }
+}
