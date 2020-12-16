@@ -1,20 +1,8 @@
 Component({
   properties: {
     apiObj: Object,
-    refreshFlag: {
-      type: Boolean,
-      value: false,
-      observer: function(){
-        this.refreshListData()
-      }
-    },
-    loadMoreFlag: {
-      type: Boolean,
-      value: false,
-      observer: function(){
-        this.getData()
-      }
-    },
+    refreshFlag: Boolean,
+    loadMoreFlag: Boolean,
     size: {
       type: Number,
       value: 10
@@ -30,10 +18,21 @@ Component({
     isShowFooterLoading: false,
     isShowFooterNoMore: false
   },
+
+  observers: {
+    refreshFlag () {
+      this.refreshListData()
+    },
+    loadMoreFlag () {
+      this.getData()
+    }
+  },
+
   attached() {
     this.data.initLoading = true
     this.refreshListData()
   },
+
   methods: {
     refreshListData () {
       this.data.currentPage = 0

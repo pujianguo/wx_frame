@@ -65,7 +65,7 @@
   <page refreshFlag="{{refreshFlag}}" loadMoreFlag="{{loadMoreFlag}}" apiObj="{{apiObj}}"
     bind:refreshList="bindRefreshList" bind:closeInitLoading="bindCloseInitLoading"></page>
 
-  <button class="kg-normal-btn contact" hover-class="none" open-type="contact">
+  <button class="g-normal-btn contact" hover-class="none" open-type="contact">
     <image class="contact-image" src="/images/datum/contact_btn.png" mode="aspectFill"></image>
   </button>
 </view>

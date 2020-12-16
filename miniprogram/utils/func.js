@@ -74,7 +74,7 @@ export const showToastSuccess = (text) => {
   wx.showToast({ title: text, icon: 'success', duration: 2000 })
 }
 export const showToastError = (text) => {
-  wx.showToast({ title: text, image: '/images/icon/error.png', duration: 2000 })
+  wx.showToast({ title: text, image: '/images/icons/error.png', duration: 2000 })
 }
 
 /* 打开 请求数据loading弹框 */

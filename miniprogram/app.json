@@ -1,20 +1,12 @@
 {
   "pages": [
+    "pages/apply/apply",
     "pages/index/index",
-    "pages/cloud/cloud",
     "pages/datum/datum",
-    "pages/userConsole/userConsole",
-    "pages/storageConsole/storageConsole",
-    "pages/databaseGuide/databaseGuide",
-    "pages/addFunction/addFunction",
-    "pages/deployFunctions/deployFunctions",
-    "pages/chooseLib/chooseLib",
-    "pages/openapi/openapi",
+    "pages/about/about",
     "pages/openapi/serverapi/serverapi",
     "pages/openapi/callback/callback",
-    "pages/openapi/cloudid/cloudid",
-    "pages/im/im",
-    "pages/im/room/room"
+    "pages/openapi/cloudid/cloudid"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -34,13 +26,13 @@
         "selectedIconPath": "images/tabs/home_selected.png"
       },
       {
-        "pagePath": "pages/cloud/cloud",
+        "pagePath": "pages/apply/apply",
         "text": "应用",
         "iconPath": "images/tabs/app.png",
         "selectedIconPath": "images/tabs/app_selected.png"
       },
       {
-        "pagePath": "pages/datum/datum",
+        "pagePath": "pages/about/about",
         "text": "关于",
         "iconPath": "images/tabs/about.png",
         "selectedIconPath": "images/tabs/about_selected.png"

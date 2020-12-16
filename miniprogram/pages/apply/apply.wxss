@@ -1,0 +1,21 @@
+/* miniprogram/pages/apply/apply.wxss */
+
+.userinfo{
+  width: 100%;
+  height: 200rpx;
+  background-color: #2AA8F4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.userinfo-avatar{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background-size: cover;
+  background-color: white;
+}
+.uploader-image{
+  width: 100%;
+  height: 360rpx;
+}

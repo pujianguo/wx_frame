@@ -17,6 +17,7 @@ Page({
     provinceList: [],
     cityList: [],
 
+    // 分页相关
     list: [],
     refreshFlag: false,
     loadMoreFlag: false,
@@ -67,6 +68,7 @@ Page({
   },
 
   /** ********** methods ********** **/
+  // 分页相关
   bindCloseInitLoading() {
     this.setData({initLoading: false})
   },

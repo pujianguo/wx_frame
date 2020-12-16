@@ -14,6 +14,17 @@ export const wxLogin = () => {
   })
 }
 
+/** ********************** 获取用户授权信息 ************************/
+export const wxGetSetting = () => {
+  return new Promise((resolve, reject) => {
+    wx.getSetting({
+      withCredentials: true,
+      success: res => resolve(res),
+      fail: err => reject(err)
+    })
+  })
+}
+
 /** ********************** 获取用户个人信息 ************************/
 export const wxGetUserInfo = () => {
   return new Promise((resolve, reject) => {
@@ -25,10 +36,11 @@ export const wxGetUserInfo = () => {
   })
 }
 
- // 选择图片
-export const wxChooseImage = () => {
+/** ********************** 选择图片 ************************/
+export const wxChooseImage = (count = 1) => {
   return new Promise((resolve, reject) => {
     wx.chooseImage({
+      count: count,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: result => resolve(result),

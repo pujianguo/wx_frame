@@ -1,0 +1,34 @@
+<view>
+  <view class="userinfo">
+    <button
+      open-type="getUserInfo"
+      bindgetuserinfo="onGetUserInfo"
+      class="userinfo-avatar"
+      style="background-image: url({{avatarUrl}})"
+      size="default"
+    ></button>
+  </view>
+
+  <van-cell-group title="常用页面">
+    <van-cell is-link title="列表页" link-type="navigateTo" url="/pages/datum/datum" />
+  </van-cell-group>
+
+  <van-cell-group title="登录相关">
+    <van-cell is-link title="点击获取 openid" bind:click="onGetOpenid" />
+  </van-cell-group>
+
+  <van-cell-group title="云函数">
+    <van-cell is-link title="sum" bind:click="onSum" />
+  </van-cell-group>
+
+  <van-cell-group title="云存储">
+    <van-cell is-link title="上传图片" bind:click="doUpload" />
+    <image class="uploader-image" wx:if="{{imgUrl}}" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
+  </van-cell-group>
+
+  <van-cell-group title="云调用">
+    <van-cell is-link title="服务端调用" link-type="navigateTo" url="/pages/openapi/serverapi/serverapi" />
+    <van-cell is-link title="开放数据调用" link-type="navigateTo" url="/pages/openapi/cloudid/cloudid" />
+    <van-cell is-link title="消息推送" link-type="navigateTo" url="/pages/openapi/callback/callback" />
+  </van-cell-group>
+</view>

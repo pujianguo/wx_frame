@@ -1,7 +1,0 @@
-/* pages/chooseLib/chooseLib.wxss */
-
-@import "../../styles/guide.wxss";
-
-.black {
-  color: black;
-}
