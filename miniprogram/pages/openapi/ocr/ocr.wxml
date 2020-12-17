@@ -1,0 +1,11 @@
+<view>
+  <van-cell is-link title="识别银行卡" bind:click="onBankcard" />
+  <van-cell is-link title="识别身份证" bind:click="onIdcard" />
+
+  <view wx:if="{{bankcardResult}}">
+    {{bankcardResult}}
+  </view>
+  <view wx:if="{{idcardResult}}">
+    {{idcardResult}}
+  </view>
+</view>

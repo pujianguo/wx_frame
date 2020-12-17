@@ -74,6 +74,12 @@
         {
           "name": "pages/openapi/cloudid/cloudid",
           "pathName": "pages/openapi/cloudid/cloudid",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/openapi/ocr/ocr",
+          "pathName": "pages/openapi/ocr/ocr",
           "scene": null
         }
       ]

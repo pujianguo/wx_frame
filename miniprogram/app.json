@@ -6,7 +6,8 @@
     "pages/about/about",
     "pages/openapi/serverapi/serverapi",
     "pages/openapi/callback/callback",
-    "pages/openapi/cloudid/cloudid"
+    "pages/openapi/cloudid/cloudid",
+    "pages/openapi/ocr/ocr"
   ],
   "window": {
     "backgroundTextStyle": "dark",

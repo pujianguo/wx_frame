@@ -30,5 +30,6 @@
     <van-cell is-link title="服务端调用" link-type="navigateTo" url="/pages/openapi/serverapi/serverapi" />
     <van-cell is-link title="开放数据调用" link-type="navigateTo" url="/pages/openapi/cloudid/cloudid" />
     <van-cell is-link title="消息推送" link-type="navigateTo" url="/pages/openapi/callback/callback" />
+    <van-cell is-link title="ocr" link-type="navigateTo" url="/pages/openapi/ocr/ocr" />
   </van-cell-group>
 </view>
