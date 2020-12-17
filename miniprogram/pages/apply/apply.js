@@ -26,6 +26,7 @@ Page({
 
   // 获取用户信息
   onGetUserInfo(e) {
+    console.log(e)
     // a. 未授权时，打开授权弹框，点击按钮后 获取到 e，并且点击“允许”后，e.detail中的能获取到 userInfo
     // b. 已授权时，不会展示弹框，直接能获取到 e
     if (!this.data.logged && e.detail.userInfo) {

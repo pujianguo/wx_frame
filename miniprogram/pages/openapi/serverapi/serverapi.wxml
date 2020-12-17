@@ -56,7 +56,7 @@
     <text class="p">3. 云存储需设置为公有读</text>
   </view>
 
-  <view class="guide">
+  <view class="guide" wx:if="{{wxacodeSrc}}">
     <image src="{{wxacodeSrc}}" mode="aspectFit"></image>
   </view>
 

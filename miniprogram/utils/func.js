@@ -31,7 +31,14 @@ export const showModal = (title, content, callback) => {
     }
   })
 }
-
+// 只展示标题，内容，没有操作
+export const showModalInfo = (title, content) => {
+  wx.showModal({
+    title: title,
+    content: content,
+    showCancel: false
+  })
+}
 /* 提示框 有地址跳转 */
 export const showWarningAndToUrl = (text, url) => {
   wx.showModal({

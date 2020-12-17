@@ -1,5 +1,7 @@
-Page({
+import { hideRequestLoading, showModalInfo, showRequestLoading, showToastError, showToastSuccess } from "../../../utils/func"
+import { wxGetSetting } from "../../../utils/wx"
 
+Page({
   data: {
     templateId: '',
     subscribeMessageResult: '',
@@ -9,132 +11,121 @@ Page({
     showClearWXACodeCache: false,
   },
 
-  async getSubscribeMessageTemplate() {
-    try {
-      const { result } = await wx.cloud.callFunction({
-        name: 'openapi',
-        data: {
-          action: 'requestSubscribeMessage',
-        },
-      })
-
-      const templateId = result
-
+  // 获取模板ID
+  getSubscribeMessageTemplate() {
+    showRequestLoading()
+    wx.cloud.callFunction({
+      name: 'openapi',
+      data: {
+        action: 'requestSubscribeMessage',
+      }
+    }).then(res => {
+      hideRequestLoading()
+      showToastSuccess('获取成功')
+      const templateId = res
       console.warn('[云函数] [openapi] 获取订阅消息模板 调用成功：', templateId)
-      this.setData({
-        templateId,
-      })
-    } catch (err) {
-      wx.showToast({
-        icon: 'none',
-        title: '调用失败',
-      })
+      this.setData({templateId})
+    }).catch(err => {
+      hideRequestLoading()
+      showToastError('获取失败')
       console.error('[云函数] [openapi] 获取订阅消息模板 调用失败：', err)
-    }
+    })
   },
 
-  async requestSubscribeMessage() {
+  // 打开弹框询问用户是否允许
+  requestSubscribeMessage() {
     const templateId = this.data.templateId
-
     if (!templateId) {
-      wx.showModal({
-        title: '发送失败',
-        content: '请先获取模板 ID',
-        showCancel: false,
-      })
+      showModalInfo('发送失败', '请先获取模板 ID')
     }
 
+    // 开发者工具无法调试，在手机弹出选择框，用户点击
+    /**
+     * 返回数据格式：
+     * * 取消：
+     *  {
+     *    errMsg: "requestSubscribeMessage:ok",
+     *    kypL55KVgSYWqBc1VqJC80rV1nkSW-DiL08zkjrefZk: "reject"
+     *  }
+     * * 允许：
+     *  {
+     *    errMsg: ""requestSubscribeMessage:ok",
+     *    kypL55KVgSYWqBc1VqJC80rV1nkSW-DiL08zkjrefZk: "accept"
+     *  }
+     *
+     * * 弹框最下面询问“总是保持以上选择，不再询问”
+     *   勾选之后，一直保存
+     */
     wx.requestSubscribeMessage({
-      tmplIds: [templateId],
-      success: (res) => {
-        if (res[templateId] === 'accept') {
-          this.setData({
-            requestSubscribeMessageResult: '成功',
-          })
-        } else {
-          this.setData({
-            requestSubscribeMessageResult: `失败（${res[templateId]}）`,
-          })
-        }
-      },
-      fail: (err) => {
+      tmplIds: [templateId]
+    }).then(res => {
+      if (res[templateId] === 'accept') {
         this.setData({
-          requestSubscribeMessageResult: `失败（${JSON.stringify(err)}）`,
+          requestSubscribeMessageResult: '成功',
         })
-      },
+      } else {
+        this.setData({
+          requestSubscribeMessageResult: `失败（${res[templateId]}）`,
+        })
+      }
+    }).catch(err => {
+      this.setData({
+        requestSubscribeMessageResult: `失败（${JSON.stringify(err)}）`,
+      })
     })
   },
 
+  // 发送订阅消息
+  /**
+   *
+   * 发送前 请先通过 wx.requestSubscribeMessage() 获取用户权限，用户点击允许之后才能发送，否则 发送失败
+   * 如果用户勾选了“保存选择”，以后可以直接使用
+   * 若果用户没有勾选“保存选择”，以后每次调用前必须打开弹框询问
+   * 询问之后 -> 调用 之后，下次再调用就得重新询问，否则失败
+   */
   sendSubscribeMessage(e) {
-    this.setData({
-      subscribeMessageResult: '',
-    })
-
+    // 清空调用结果展示
+    this.setData({subscribeMessageResult: ''})
     wx.cloud.callFunction({
       name: 'openapi',
       data: {
         action: 'sendSubscribeMessage',
         templateId: this.data.templateId,
-      },
-      success: res => {
-        console.warn('[云函数] [openapi] subscribeMessage.send 调用成功：', res)
-        wx.showModal({
-          title: '发送成功',
-          content: '请返回微信主界面查看',
-          showCancel: false,
-        })
-        wx.showToast({
-          title: '发送成功，请返回微信主界面查看',
-        })
-        this.setData({
-          subscribeMessageResult: JSON.stringify(res.result)
-        })
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '调用失败',
-        })
-        console.error('[云函数] [openapi] subscribeMessage.send 调用失败：', err)
       }
+    }).then(res => {
+      console.warn('[云函数] [openapi] subscribeMessage.send 调用成功：', res)
+      showModalInfo('发送成功', '请返回微信主界面查看')
+      this.setData({
+        subscribeMessageResult: JSON.stringify(res.result)
+      })
+    }).catch(err => {
+      showToastError('调用失败')
+      console.error('[云函数] [openapi] subscribeMessage.send 调用失败：', err)
     })
   },
 
   submitSubscribeMessageForm(e) {
-    this.setData({
-      subscribeMessageResult: '',
-    })
-
+    // 清空调用结果展示
+    this.setData({subscribeMessageResult: ''})
     wx.cloud.callFunction({
       name: 'openapi',
       data: {
         action: 'sendSubscribeMessage',
         formId: e.detail.formId,
       },
-      success: res => {
-        console.warn('[云函数] [openapi] subscribeMessage.send 调用成功：', res)
-        wx.showModal({
-          title: '发送成功',
-          content: '请返回微信主界面查看',
-          showCancel: false,
-        })
-        wx.showToast({
-          title: '发送成功，请返回微信主界面查看',
-        })
-        this.setData({
-          templateMessageResult: JSON.stringify(res.result)
-        })
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '调用失败',
-        })
-        console.error('[云函数] [openapi] templateMessage.send 调用失败：', err)
-      }
+    }).then(res => {
+      console.warn('[云函数] [openapi] subscribeMessage.send 调用成功：', res)
+      showModalInfo('发送成功', '请返回微信主界面查看')
+      this.setData({
+        templateMessageResult: JSON.stringify(res.result)
+      })
+    }).catch(err => {
+      showToastError('调用失败')
+      console.error('[云函数] [openapi] templateMessage.send 调用失败：', err)
     })
   },
 
+  // 获取小程序码
   onGetWXACode() {
     this.setData({
       wxacodeSrc: '',
@@ -151,51 +142,43 @@ Page({
       this.setData({
         wxacodeSrc: fileID,
         wxacodeResult: `从本地缓存中取得了小程序码的云文件 ID`,
-        showClearWXACodeCache: true,
+        showClearWXACodeCache: true
       })
       console.log(`从本地缓存中取得了小程序码的云文件 ID：${fileID}`)
     } else {
+      // 调用云函数，获取小程序码
+      showRequestLoading()
       wx.cloud.callFunction({
         name: 'openapi',
         data: {
           action: 'getWXACode',
-        },
-        success: res => {
-          console.warn('[云函数] [openapi] wxacode.get 调用成功：', res)
-          wx.showToast({
-            title: '调用成功',
-          })
-          this.setData({
-            wxacodeSrc: res.result,
-            wxacodeResult: `云函数获取二维码成功`,
-            showClearWXACodeCache: true,
-          })
-          wx.setStorageSync('wxacodeCloudID', res.result)
-        },
-        fail: err => {
-          wx.showToast({
-            icon: 'none',
-            title: '调用失败',
-          })
-          console.error('[云函数] [openapi] wxacode.get 调用失败：', err)
         }
+      }).then(res => {
+        this.setData({
+          wxacodeSrc: res.result,
+          wxacodeResult: `云函数获取二维码成功`,
+          showClearWXACodeCache: true,
+        })
+        showToastSuccess('调用成功')
+        console.warn('[云函数] [openapi] wxacode.get 调用成功：', res)
+        wx.setStorageSync('wxacodeCloudID', res.result)
+      }).catch(err => {
+        showToastError('调用失败')
+        console.error('[云函数] [openapi] wxacode.get 调用失败：', err)
+      }).finally(_ => {
+        hideRequestLoading()
       })
     }
   },
 
   clearWXACodeCache() {
-    wx.removeStorageSync('wxacodeCloudID')
-
     this.setData({
       wxacodeSrc: '',
       wxacodeResult: '',
       showClearWXACodeCache: false,
     })
-
-    wx.showToast({
-      title: '清除成功',
-    })
+    wx.removeStorageSync('wxacodeCloudID')
+    showToastSuccess('清除成功')
   },
 
 })
-
