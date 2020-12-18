@@ -10,23 +10,23 @@ const ENV = accountInfo.miniProgram.envVersion
 const develop = {
   env: 'develop',
   baseUrl: 'http://develop-api.xxx.com',
-  debug: true
+  debug: true,
 }
 // 体验版
 const trial = {
   env: 'trial',
   baseUrl: 'http://trial-api.xxx.com',
-  debug: true
+  debug: true,
 }
 // 正式版
 const release = {
   env: 'release',
   baseUrl: 'http://release-api.xxx.com',
-  debug: false
+  debug: false,
 }
 
 const common = {
-  loginPath: '/pages/login/login'
+  loginPath: '/pages/login/login',
 }
 
 let config = {}

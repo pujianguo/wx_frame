@@ -42,5 +42,5 @@ export default {
   rmUserInfo: () => rmStorage(USERINFO),
 
   // clear all
-  clearStorage: () => clearStorage
+  clearStorage: () => clearStorage,
 }

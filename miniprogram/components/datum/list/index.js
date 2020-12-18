@@ -1,14 +1,14 @@
-const { showToast, showRequestLoading, hideRequestLoading } = require("../../../utils/func")
+const { showToast, showRequestLoading, hideRequestLoading } = require('../../../utils/func')
 
 Component({
   properties: {
     list: {
       type: Array,
-      value: []
+      value: [],
     },
   },
   data: {
-    itemLock: false
+    itemLock: false,
   },
   methods: {
     clickItem (e) {
@@ -16,7 +16,7 @@ Component({
       const item = this.data.list[index]
       if (item.hasGet) {
         wx.navigateTo({
-          url: `/pages/datum-preview/datum-preview?id=${item.id}&title=${item.title}`
+          url: `/pages/datum-preview/datum-preview?id=${item.id}&title=${item.title}`,
         })
       }
     },
@@ -33,10 +33,10 @@ Component({
         this.data.itemLock = false
         const key = `list[${index}].hasGet`
         this.setData({
-          [key]: true
+          [key]: true,
         })
-        wx.navigateTo({url: '/pages/mydatum/mydatum'})
+        wx.navigateTo({ url: '/pages/mydatum/mydatum' })
       }, 300)
-    }
-  }
+    },
+  },
 })

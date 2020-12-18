@@ -27,10 +27,9 @@
  *
  */
 export default (data, rules) => {
-  let msg = ''
   for (let i = 0; i < rules.length; i++) {
-    let rule = rules[i]
-    let value = data[rules[i].key]
+    const rule = rules[i]
+    const value = data[rules[i].key]
 
     if (['string', 'phone', 'email', 'number'].includes(rule.type) && value === '') {
       if (rule.required) {
@@ -96,5 +95,5 @@ export default (data, rules) => {
         break
     }
   }
-  return msg
+  return ''
 }

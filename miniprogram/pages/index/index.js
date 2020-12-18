@@ -1,10 +1,9 @@
-//index.js
-const app = getApp()
-
+// index.js
 Page({
+
   data: {
   },
 
-  onLoad: function() {
-  }
+  onLoad: function () {
+  },
 })

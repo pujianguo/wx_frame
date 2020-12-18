@@ -1,8 +1,5 @@
 {
   "permissions": {
-    "openapi": [
-      "ocr.bankcard",
-      "ocr.idcard"
-    ]
+    "openapi": ["ocr.bankcard", "ocr.idcard"]
   }
 }

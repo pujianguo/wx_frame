@@ -8,11 +8,11 @@ import { showRequestLoading, hideRequestLoading, showRequestError, checkTokenToL
 import config from '../config'
 
 const httpRequest = function (url, method, data, needAuth = true, loading = true) {
-  let header = {
-    'Content-Type': 'application/json'
+  const header = {
+    'Content-Type': 'application/json',
   }
   if (needAuth) {
-    let token = storage.getToken()
+    const token = storage.getToken()
     if (!token) {
       checkTokenToLogin()
       return Promise.reject(new Error('未登陆'))
@@ -29,7 +29,7 @@ const httpRequest = function (url, method, data, needAuth = true, loading = true
       header: header,
       success: res => {
         if (res.statusCode >= 400) {
-          let msg = getResponseError(res)
+          const msg = getResponseError(res)
           showRequestError(msg)
           reject(msg)
         } else {
@@ -39,7 +39,7 @@ const httpRequest = function (url, method, data, needAuth = true, loading = true
       fail: e => reject(e),
       complete: () => {
         loading && hideRequestLoading()
-      }
+      },
     })
   })
 }
@@ -67,26 +67,26 @@ const getResponseError = res => {
 
 /** ******************** http请求相关 ******************** **/
 export const _publicGet = function (url, data = {}, loading = true) {
-  let fullUrl = config.baseUrl + url
+  const fullUrl = config.baseUrl + url
   return httpRequest(fullUrl, 'GET', data, false, loading)
 }
 export const _get = function (url, data = {}, loading = true) {
-  let fullUrl = config.baseUrl + url
+  const fullUrl = config.baseUrl + url
   return httpRequest(fullUrl, 'GET', data, true, loading)
 }
 export const _publicPost = function (url, data = {}, loading = true) {
-  let fullUrl = config.baseUrl + url
+  const fullUrl = config.baseUrl + url
   return httpRequest(fullUrl, 'POST', data, false, loading)
 }
 export const _post = function (url, data = {}, loading = true) {
-  let fullUrl = config.baseUrl + url
+  const fullUrl = config.baseUrl + url
   return httpRequest(fullUrl, 'POST', data, true, loading)
 }
 export const _put = function (url, data = {}, loading = true) {
-  let fullUrl = config.baseUrl + url
+  const fullUrl = config.baseUrl + url
   return httpRequest(fullUrl, 'PUT', data, true, loading)
 }
 export const _delete = function (url, data = {}, loading = true) {
-  let fullUrl = config.baseUrl + url
+  const fullUrl = config.baseUrl + url
   return httpRequest(fullUrl, 'DELETE', data, true, loading)
 }

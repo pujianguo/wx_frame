@@ -1,5 +1,5 @@
-import { hideRequestLoading, showModalInfo, showRequestLoading, showToastError, showToastSuccess } from "../../../utils/func"
-import { wxGetSetting } from "../../../utils/wx"
+import { hideRequestLoading, showModalInfo, showRequestLoading, showToastError, showToastSuccess } from '../../../utils/func'
+import { wxGetSetting } from '../../../utils/wx'
 
 Page({
   data: {
@@ -12,19 +12,19 @@ Page({
   },
 
   // 获取模板ID
-  getSubscribeMessageTemplate() {
+  getSubscribeMessageTemplate () {
     showRequestLoading()
     wx.cloud.callFunction({
       name: 'openapi',
       data: {
         action: 'requestSubscribeMessage',
-      }
+      },
     }).then(res => {
       hideRequestLoading()
       showToastSuccess('获取成功')
       const templateId = res
       console.warn('[云函数] [openapi] 获取订阅消息模板 调用成功：', templateId)
-      this.setData({templateId})
+      this.setData({ templateId })
     }).catch(err => {
       hideRequestLoading()
       showToastError('获取失败')
@@ -33,7 +33,7 @@ Page({
   },
 
   // 打开弹框询问用户是否允许
-  requestSubscribeMessage() {
+  requestSubscribeMessage () {
     const templateId = this.data.templateId
     if (!templateId) {
       showModalInfo('发送失败', '请先获取模板 ID')
@@ -57,7 +57,7 @@ Page({
      *   勾选之后，一直保存
      */
     wx.requestSubscribeMessage({
-      tmplIds: [templateId]
+      tmplIds: [templateId],
     }).then(res => {
       if (res[templateId] === 'accept') {
         this.setData({
@@ -83,20 +83,20 @@ Page({
    * 若果用户没有勾选“保存选择”，以后每次调用前必须打开弹框询问
    * 询问之后 -> 调用 之后，下次再调用就得重新询问，否则失败
    */
-  sendSubscribeMessage(e) {
+  sendSubscribeMessage (e) {
     // 清空调用结果展示
-    this.setData({subscribeMessageResult: ''})
+    this.setData({ subscribeMessageResult: '' })
     wx.cloud.callFunction({
       name: 'openapi',
       data: {
         action: 'sendSubscribeMessage',
         templateId: this.data.templateId,
-      }
+      },
     }).then(res => {
       console.warn('[云函数] [openapi] subscribeMessage.send 调用成功：', res)
       showModalInfo('发送成功', '请返回微信主界面查看')
       this.setData({
-        subscribeMessageResult: JSON.stringify(res.result)
+        subscribeMessageResult: JSON.stringify(res.result),
       })
     }).catch(err => {
       showToastError('调用失败')
@@ -104,9 +104,9 @@ Page({
     })
   },
 
-  submitSubscribeMessageForm(e) {
+  submitSubscribeMessageForm (e) {
     // 清空调用结果展示
-    this.setData({subscribeMessageResult: ''})
+    this.setData({ subscribeMessageResult: '' })
     wx.cloud.callFunction({
       name: 'openapi',
       data: {
@@ -117,7 +117,7 @@ Page({
       console.warn('[云函数] [openapi] subscribeMessage.send 调用成功：', res)
       showModalInfo('发送成功', '请返回微信主界面查看')
       this.setData({
-        templateMessageResult: JSON.stringify(res.result)
+        templateMessageResult: JSON.stringify(res.result),
       })
     }).catch(err => {
       showToastError('调用失败')
@@ -126,7 +126,7 @@ Page({
   },
 
   // 获取小程序码
-  onGetWXACode() {
+  onGetWXACode () {
     this.setData({
       wxacodeSrc: '',
       wxacodeResult: '',
@@ -141,8 +141,8 @@ Page({
       // 如需清除缓存，选择菜单栏中的 “工具 -> 清除缓存 -> 清除数据缓存”，或在 Storage 面板中删掉相应的 key
       this.setData({
         wxacodeSrc: fileID,
-        wxacodeResult: `从本地缓存中取得了小程序码的云文件 ID`,
-        showClearWXACodeCache: true
+        wxacodeResult: '从本地缓存中取得了小程序码的云文件 ID',
+        showClearWXACodeCache: true,
       })
       console.log(`从本地缓存中取得了小程序码的云文件 ID：${fileID}`)
     } else {
@@ -152,11 +152,11 @@ Page({
         name: 'openapi',
         data: {
           action: 'getWXACode',
-        }
+        },
       }).then(res => {
         this.setData({
           wxacodeSrc: res.result,
-          wxacodeResult: `云函数获取二维码成功`,
+          wxacodeResult: '云函数获取二维码成功',
           showClearWXACodeCache: true,
         })
         showToastSuccess('调用成功')
@@ -171,7 +171,7 @@ Page({
     }
   },
 
-  clearWXACodeCache() {
+  clearWXACodeCache () {
     this.setData({
       wxacodeSrc: '',
       wxacodeResult: '',

@@ -13,17 +13,17 @@ exports.main = async (event, context) => {
       return getIdcard(event)
     }
     default: {
-      return
+      return ''
     }
   }
 }
 
 // 银行卡
-async function getBankcard(event) {
+async function getBankcard (event) {
   try {
     const result = await cloud.openapi.ocr.bankcard({
       type: 'photo',
-      imgUrl: event.imgUrl
+      imgUrl: event.imgUrl,
     })
     return result
   } catch (err) {
@@ -32,11 +32,11 @@ async function getBankcard(event) {
 }
 
 // 身份证
-async function getIdcard(event) {
+async function getIdcard (event) {
   try {
     const result = await cloud.openapi.ocr.idcard({
       type: 'photo',
-      imgUrl: event.imgUrl
+      imgUrl: event.imgUrl,
       // img: {
       //   contentType: 'image/png',
       //   value: Buffer

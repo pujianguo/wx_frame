@@ -20,20 +20,20 @@ exports.main = async (event, context) => {
       return getOpenData(event)
     }
     default: {
-      return
+      return ''
     }
   }
 }
 
 // 获取订阅消息模板ID
-async function requestSubscribeMessage(event) {
+async function requestSubscribeMessage (event) {
   // 此处为模板 ID，开发者需要到小程序管理后台 - 订阅消息 - 公共模板库中添加模板，
   // 然后在我的模板中找到对应模板的 ID，填入此处
   return 'kypL55KVgSYWqBc1VqJC80rV1nkSW-DiL08zkjrefZk'
 }
 
 // 发送订阅消息
-async function sendSubscribeMessage(event) {
+async function sendSubscribeMessage (event) {
   const { OPENID } = cloud.getWXContext()
 
   const { templateId } = event
@@ -49,22 +49,22 @@ async function sendSubscribeMessage(event) {
         value: '每日签到',
       },
       thing2: {
-        value: '点击立即签到'
+        value: '点击立即签到',
       },
       name3: {
-        value: '张三'
+        value: '张三',
       },
       date4: {
         value: '2020-01-01 00:00',
       },
-    }
+    },
   })
 
   return sendResult
 }
 
 // 获取小程序码
-async function getWXACode(event) {
+async function getWXACode (event) {
   // 此处将获取永久有效的小程序码，并将其保存在云文件存储中，最后返回云文件 ID 给前端使用
 
   const wxacodeResult = await cloud.openapi.wxacode.get({
@@ -88,7 +88,7 @@ async function getWXACode(event) {
   return uploadResult.fileID
 }
 
-async function getOpenData(event) {
+async function getOpenData (event) {
   return cloud.getOpenData({
     list: event.openData.list,
   })

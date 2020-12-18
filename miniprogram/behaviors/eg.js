@@ -28,5 +28,5 @@ export default Behavior({
 
   // 方法
   methods: {
-  }
+  },
 })

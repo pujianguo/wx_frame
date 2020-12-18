@@ -1,5 +1,4 @@
-import { showToastError, showToastSuccess } from "../../../utils/func"
-import { wxGetSetting } from "../../../utils/wx"
+import { showToastError, showToastSuccess } from '../../../utils/func'
 
 // miniprogram/pages/openapi/cloudid/cloudid.js
 Page({
@@ -10,7 +9,7 @@ Page({
   },
 
   // 获取微信运动数据
-  onGetWeRunData() {
+  onGetWeRunData () {
     /**
      * 获取微信运动数据
      * 没有权限时，弹框选择权限
@@ -36,22 +35,22 @@ Page({
             openData: {
               list: [
                 res.cloudID,
-              ]
-            }
-          }
+              ],
+            },
+          },
         }).then(res => {
-          this.setData({weRunResult: JSON.stringify(res.result)})
+          this.setData({ weRunResult: JSON.stringify(res.result) })
           showToastSuccess('敏感数据获取成功')
           console.log('[onGetWeRunData] 收到 echo 回包：', res)
         }).catch(err => {
           showToastError('敏感数据获取失败')
           console.log('[onGetWeRunData] 失败：', err)
         })
-      }
+      },
     })
   },
 
-  onGetUserInfo(e) {
+  onGetUserInfo (e) {
     wx.cloud.callFunction({
       // 1.
       name: 'echo',
@@ -82,5 +81,5 @@ Page({
         title: '敏感数据获取成功',
       })
     })
-  }
+  },
 })

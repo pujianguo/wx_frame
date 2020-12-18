@@ -5,8 +5,8 @@ Component({
     loadMoreFlag: Boolean,
     size: {
       type: Number,
-      value: 10
-    }
+      value: 10,
+    },
   },
   data: {
     initLoading: true, // 初始化加载的标识
@@ -16,7 +16,7 @@ Component({
     pages: 0,
 
     isShowFooterLoading: false,
-    isShowFooterNoMore: false
+    isShowFooterNoMore: false,
   },
 
   observers: {
@@ -25,10 +25,10 @@ Component({
     },
     loadMoreFlag () {
       this.getData()
-    }
+    },
   },
 
-  attached() {
+  attached () {
     this.data.initLoading = true
     this.refreshListData()
   },
@@ -42,9 +42,9 @@ Component({
       if (this.data.loading || (this.data.currentPage > 0 && this.data.currentPage >= this.data.pages)) {
         return
       }
-      let query = Object.assign({}, this.data.apiObj.query, {
+      const query = Object.assign({}, this.data.apiObj.query, {
         offset: this.data.currentPage * this.data.size,
-        limit: this.data.size
+        limit: this.data.size,
       })
       this.data.loading = true
       this.setFooter()
@@ -59,7 +59,7 @@ Component({
         this.data.list = list
         this.data.currentPage = this.data.currentPage + 1
         this.data.pages = Math.ceil(res.count / this.data.size)
-        this.triggerEvent('refreshList', {list: list})
+        this.triggerEvent('refreshList', { list: list })
       }).catch(_ => {
       }).finally(_ => {
         if (this.data.initLoading) {
@@ -84,8 +84,8 @@ Component({
       }
       this.setData({
         isShowFooterLoading,
-        isShowFooterNoMore
+        isShowFooterNoMore,
       })
-    }
-  }
+    },
+  },
 })

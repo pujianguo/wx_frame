@@ -7,12 +7,12 @@ import config from '../config'
 import store from './store'
 
 // 微信API Promise化
-export const wxPromise = function(api) {
-  return function(options = {}) {
+export const wxPromise = function (api) {
+  return function (options = {}) {
     return new Promise((resolve, reject) => {
       api(Object.assign(options, {
         success: result => resolve(result),
-        fail: error => reject(error)
+        fail: error => reject(error),
       }))
     })
   }
@@ -28,7 +28,7 @@ export const showModal = (title, content, callback) => {
       if (res.confirm) {
         callback()
       }
-    }
+    },
   })
 }
 // 只展示标题，内容，没有操作
@@ -36,7 +36,7 @@ export const showModalInfo = (title, content) => {
   wx.showModal({
     title: title,
     content: content,
-    showCancel: false
+    showCancel: false,
   })
 }
 /* 提示框 有地址跳转 */
@@ -46,7 +46,7 @@ export const showWarningAndToUrl = (text, url) => {
     showCancel: false,
     success () {
       wx.navigateTo({ url: url })
-    }
+    },
   })
 }
 /* 提示框 返回上一级  (进入页面请求失败时会用到))) */
@@ -55,7 +55,7 @@ export const showWarningBack = text => {
     content: text,
     success () {
       wx.navigateBack({ delta: 1 })
-    }
+    },
   })
 }
 /* 提示框 表单提交成功 */
@@ -66,7 +66,7 @@ export const showConfirmBack = (text, callback) => {
     showCancel: false,
     success: () => {
       callback()
-    }
+    },
   })
 }
 /* 提示框 无其他操作 */
@@ -96,18 +96,17 @@ export const hideRequestLoading = () => {
 export const showRequestError = msg => {
   wx.showModal({
     content: msg,
-    showCancel: false
+    showCancel: false,
   })
 }
-
 
 // 检测是否登录，没有登录跳到登录页面
 export const checkTokenToLogin = () => {
   if (!store.getToken()) {
     let path = config.loginPath
-    let pages = getCurrentPages()
+    const pages = getCurrentPages()
     if (pages.length) {
-      let page = pages.pop()
+      const page = pages.pop()
       let { route, options } = page
       options = Object.keys(options).map(key => {
         return key + '=' + options[key]
@@ -150,35 +149,35 @@ export const formatMoney = value => {
 /** *************** 时间相关 *************** **/
 export const formatMonth = t => {
   if (t) {
-    const {year, month} = getTimeItem(t)
+    const { year, month } = getTimeItem(t)
     return `${year}-${month}`
   }
   return ''
 }
 export const formatDate = t => {
   if (t) {
-    const {year, month, day} = getTimeItem(t)
+    const { year, month, day } = getTimeItem(t)
     return `${year}-${month}-${day}`
   }
   return ''
 }
 export const formatMinute = t => {
   if (t) {
-    const {year, month, day, hour, minute} = getTimeItem(t)
+    const { year, month, day, hour, minute } = getTimeItem(t)
     return `${year}-${month}-${day} ${hour}:${minute}:${second}`
   }
   return ''
 }
 export const formatSecond = t => {
   if (t) {
-    const {year, month, day, hour, minute, second} = getTimeItem(t)
+    const { year, month, day, hour, minute, second } = getTimeItem(t)
     return `${year}-${month}-${day} ${hour}:${minute}:${second}`
   }
   return ''
 }
 
 // 检查是否需要更新小程序
-export function checkUpdateApp() {
+export function checkUpdateApp () {
   if (wx.canIUse('getUpdateManager')) {
     const updateManager = wx.getUpdateManager()
     updateManager.onCheckForUpdate(function (res) {
@@ -196,7 +195,7 @@ export function checkUpdateApp() {
                 // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
                 updateManager.applyUpdate()
               }
-            }
+            },
           })
         })
         updateManager.onUpdateFailed(function () {
@@ -204,7 +203,7 @@ export function checkUpdateApp() {
           wx.showModal({
             title: '已经有新版本了哟~',
             content: '新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~',
-            showCancel: false
+            showCancel: false,
           })
         })
       }
@@ -220,7 +219,7 @@ const getTimeItem = t => {
     day: formatNumber(date.getDate()),
     hour: formatNumber(date.getHours()),
     minute: formatNumber(date.getMinutes()),
-    second: formatNumber(date.getSeconds())
+    second: formatNumber(date.getSeconds()),
   }
 }
 const formatNumber = n => {

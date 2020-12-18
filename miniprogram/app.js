@@ -1,10 +1,9 @@
-//app.js
-
 // 解决Promise没有finally
+// eslint-disable-next-line no-extend-native
 Promise.prototype.finally = function (callback) {
   return this.then(
     value => this.constructor.resolve(callback()).then(() => value),
-    reason => this.constructor.resolve(callback()).then(() => { throw reason })
+    reason => this.constructor.resolve(callback()).then(() => { throw reason }),
   )
 }
 
@@ -24,11 +23,11 @@ App({
   checkIsiPhoneX () {
     wx.getSystemInfo({
       success: res => {
-        let model = res.model
+        const model = res.model
         if (model.search('iPhone X') !== -1) {
           this.globalData.isIphoneX = true
         }
-      }
+      },
     })
   },
   initCloud () {
@@ -40,5 +39,5 @@ App({
         traceUser: true,
       })
     }
-  }
+  },
 })

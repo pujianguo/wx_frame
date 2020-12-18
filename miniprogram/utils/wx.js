@@ -4,12 +4,12 @@
  * @Date: 2020-12-07 09:34:15
  */
 
- /** ********************** 授权 ************************/
+/** ********************** 授权 ************************/
 export const wxLogin = () => {
   return new Promise((resolve, reject) => {
     wx.login({
       success: res => resolve(res),
-      fail: err => reject(err)
+      fail: err => reject(err),
     })
   })
 }
@@ -20,7 +20,7 @@ export const wxGetSetting = () => {
     wx.getSetting({
       withCredentials: true,
       success: res => resolve(res),
-      fail: err => reject(err)
+      fail: err => reject(err),
     })
   })
 }
@@ -31,7 +31,7 @@ export const wxGetUserInfo = () => {
     wx.getUserInfo({
       withCredentials: true,
       success: res => resolve(res),
-      fail: err => reject(err)
+      fail: err => reject(err),
     })
   })
 }
@@ -44,7 +44,7 @@ export const wxChooseImage = (count = 1) => {
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: result => resolve(result),
-      fail: err => reject(err)
+      fail: err => reject(err),
     })
   })
 }
@@ -55,7 +55,7 @@ export const wxGetImageInfo = (src) => {
     wx.getImageInfo({
       src: src,
       success: result => resolve(result),
-      fail: err => reject(err)
+      fail: err => reject(err),
     })
   })
 }
@@ -66,7 +66,7 @@ export const wxCanvasToTempFilePath = (params) => {
     wx.canvasToTempFilePath({
       ...params,
       success: result => resolve(result),
-      fail: err => reject(err)
+      fail: err => reject(err),
     })
   })
 }
@@ -75,9 +75,9 @@ export const wxCanvasToTempFilePath = (params) => {
 export const wxSaveImageToPhotosAlbum = (filePath) => {
   return new Promise((resolve, reject) => {
     wx.saveImageToPhotosAlbum({
-      filePath:filePath ,
+      filePath: filePath,
       success: result => resolve(result),
-      fail: err => reject(err)
+      fail: err => reject(err),
     })
   })
 }
