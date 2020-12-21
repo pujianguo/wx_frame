@@ -1,5 +1,5 @@
 import { hideRequestLoading, showModalInfo, showRequestLoading, showToastError, showToastSuccess } from '../../../utils/func'
-import { wxGetSetting } from '../../../utils/wx'
+import { cloudRequest } from '../../../utils/request'
 
 Page({
   data: {
@@ -13,20 +13,16 @@ Page({
 
   // 获取模板ID
   getSubscribeMessageTemplate () {
-    showRequestLoading()
-    wx.cloud.callFunction({
+    cloudRequest({
+      loading: true,
       name: 'openapi',
       data: {
         action: 'requestSubscribeMessage',
       },
     }).then(res => {
-      hideRequestLoading()
       showToastSuccess('获取成功')
-      const templateId = res
-      console.warn('[云函数] [openapi] 获取订阅消息模板 调用成功：', templateId)
-      this.setData({ templateId })
+      this.setData({ templateId: res })
     }).catch(err => {
-      hideRequestLoading()
       showToastError('获取失败')
       console.error('[云函数] [openapi] 获取订阅消息模板 调用失败：', err)
     })
@@ -86,7 +82,7 @@ Page({
   sendSubscribeMessage (e) {
     // 清空调用结果展示
     this.setData({ subscribeMessageResult: '' })
-    wx.cloud.callFunction({
+    cloudRequest({
       name: 'openapi',
       data: {
         action: 'sendSubscribeMessage',
@@ -96,32 +92,11 @@ Page({
       console.warn('[云函数] [openapi] subscribeMessage.send 调用成功：', res)
       showModalInfo('发送成功', '请返回微信主界面查看')
       this.setData({
-        subscribeMessageResult: JSON.stringify(res.result),
+        subscribeMessageResult: JSON.stringify(res),
       })
     }).catch(err => {
       showToastError('调用失败')
       console.error('[云函数] [openapi] subscribeMessage.send 调用失败：', err)
-    })
-  },
-
-  submitSubscribeMessageForm (e) {
-    // 清空调用结果展示
-    this.setData({ subscribeMessageResult: '' })
-    wx.cloud.callFunction({
-      name: 'openapi',
-      data: {
-        action: 'sendSubscribeMessage',
-        formId: e.detail.formId,
-      },
-    }).then(res => {
-      console.warn('[云函数] [openapi] subscribeMessage.send 调用成功：', res)
-      showModalInfo('发送成功', '请返回微信主界面查看')
-      this.setData({
-        templateMessageResult: JSON.stringify(res.result),
-      })
-    }).catch(err => {
-      showToastError('调用失败')
-      console.error('[云函数] [openapi] templateMessage.send 调用失败：', err)
     })
   },
 
@@ -147,26 +122,24 @@ Page({
       console.log(`从本地缓存中取得了小程序码的云文件 ID：${fileID}`)
     } else {
       // 调用云函数，获取小程序码
-      showRequestLoading()
-      wx.cloud.callFunction({
+      cloudRequest({
+        loading: true,
         name: 'openapi',
         data: {
           action: 'getWXACode',
         },
       }).then(res => {
         this.setData({
-          wxacodeSrc: res.result,
+          wxacodeSrc: res,
           wxacodeResult: '云函数获取二维码成功',
           showClearWXACodeCache: true,
         })
         showToastSuccess('调用成功')
+        wx.setStorageSync('wxacodeCloudID', res)
         console.warn('[云函数] [openapi] wxacode.get 调用成功：', res)
-        wx.setStorageSync('wxacodeCloudID', res.result)
       }).catch(err => {
         showToastError('调用失败')
         console.error('[云函数] [openapi] wxacode.get 调用失败：', err)
-      }).finally(_ => {
-        hideRequestLoading()
       })
     }
   },

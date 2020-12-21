@@ -34,6 +34,7 @@
   </van-cell-group>
 
   <van-cell-group title="music">
+    <van-cell is-link title="我的音乐" link-type="navigateTo" url="/pages/music/music" />
     <van-cell is-link title="同步Banner" bind:click="syncMusicBanner" />
   </van-cell-group>
 </view>

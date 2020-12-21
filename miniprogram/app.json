@@ -7,7 +7,10 @@
     "pages/openapi/serverapi/serverapi",
     "pages/openapi/callback/callback",
     "pages/openapi/cloudid/cloudid",
-    "pages/openapi/ocr/ocr"
+    "pages/openapi/ocr/ocr",
+    "pages/music/music",
+    "pages/music/play/play",
+    "pages/music/index/index"
   ],
   "window": {
     "backgroundTextStyle": "dark",

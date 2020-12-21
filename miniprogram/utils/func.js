@@ -85,7 +85,10 @@ export const showToastError = (text) => {
 }
 
 /* 打开 请求数据loading弹框 */
-export const showRequestLoading = (title = '加载中') => {
+export const showRequestLoading = (title) => {
+  if (!title || title === true) {
+    title = '加载中'
+  }
   wx.showLoading({ title: title })
 }
 /* 关闭 请求数据loading弹框 */

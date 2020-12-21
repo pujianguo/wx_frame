@@ -80,6 +80,12 @@
         {
           "name": "pages/openapi/ocr/ocr",
           "pathName": "pages/openapi/ocr/ocr",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/music/music",
+          "pathName": "pages/music/music",
           "scene": null
         }
       ]

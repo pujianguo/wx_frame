@@ -4,8 +4,39 @@
  * @Date: 2020-12-07 09:38:53
  */
 import storage from './store'
-import { showRequestLoading, hideRequestLoading, showRequestError, checkTokenToLogin } from './func'
 import config from '../config'
+import { showRequestLoading, hideRequestLoading, showRequestError, checkTokenToLogin } from './func'
+
+/**
+ *
+ * loading 展示loading
+ *    1. boolean: 是否；2. string: 展示内容
+ * hideErrorInfo 不展示错误信息，
+ *    默认展示，设置 false 不展示，可自己处理错误
+ */
+export const cloudRequest = function (data) {
+  data.loading && showRequestLoading(data.loading)
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      ...data,
+      success: res => {
+        if (res.result.errCode) {
+          !data.hideErrorInfo && showRequestError(res.result.errMsg)
+          reject(res.result)
+        } else {
+          resolve(res.result)
+        }
+      },
+      fail: e => {
+        !data.hideErrorInfo && showRequestError(e.errMsg)
+        reject(e)
+      },
+      complete: () => {
+        data.loading && hideRequestLoading()
+      },
+    })
+  })
+}
 
 const httpRequest = function (url, method, data, needAuth = true, loading = true) {
   const header = {
@@ -20,7 +51,7 @@ const httpRequest = function (url, method, data, needAuth = true, loading = true
       header.Token = token
     }
   }
-  loading && showRequestLoading()
+  loading && showRequestLoading(loading)
   return new Promise((resolve, reject) => {
     wx.request({
       url: url,

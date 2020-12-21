@@ -1,5 +1,7 @@
 import { hideRequestLoading, showModalInfo, showRequestLoading, showToastError, showToastSuccess } from '../../utils/func'
 import { wxChooseImage, wxGetSetting, wxGetUserInfo } from '../../utils/wx'
+import { cloudRequest } from '../../utils/request'
+
 const app = getApp()
 
 Page({
@@ -40,16 +42,14 @@ Page({
 
   // 获取openid
   onGetOpenid () {
-    wx.cloud.callFunction({
+    cloudRequest({
+      loading: true,
       name: 'login',
-      data: {},
     }).then(res => {
-      console.log('[云函数] [login] user openid: ', res)
-      app.globalData.openid = res.result.openid
-      showToastSuccess('云函数调用成功：' + res.result.openid)
-    }).catch(err => {
-      console.error('[云函数] [login] 调用失败', err)
-      showToastError('云函数调用失败')
+      app.globalData.openid = res.openid
+      showToastSuccess('云函数调用成功')
+    }).catch(_ => {
+      console.log('err', _)
     })
   },
 
@@ -87,37 +87,28 @@ Page({
 
   // 调用云函数
   onSum () {
-    wx.cloud.callFunction({
+    cloudRequest({
+      loading: true,
       name: 'sum',
       data: { a: 1, b: 2 },
     }).then(res => {
       showToastSuccess('调用成功')
-      console.log('[云函数] [sum] 调用成功：', res)
-    }).catch(_ => {
-      showToastError('调用失败')
-      console.error('[云函数] [sum] 调用失败：', _)
-    })
+    }).catch(_ => {})
   },
 
   // 同步音乐Banner
   syncMusicBanner () {
-    showRequestLoading('同步中...')
-    wx.cloud.callFunction({
+    cloudRequest({
+      loading: '同步中...',
+      hideErrorInfo: true,
       name: 'crontab',
       data: {
         action: 'musicBanner',
       },
     }).then(res => {
-      if (!res.result.errCode) {
-        showToastSuccess('同步成功')
-      } else {
-        showModalInfo('同步失败', res.result.errMsg)
-      }
+      showToastSuccess('同步成功')
     }).catch(err => {
-      showToastError('同步失败')
-      console.error('同步失败: ', err)
-    }).finally(_ => {
-      hideRequestLoading()
+      showModalInfo('同步失败', err.errMsg)
     })
   },
 })

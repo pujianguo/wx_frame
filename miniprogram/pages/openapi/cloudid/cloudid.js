@@ -1,4 +1,5 @@
 import { showToastError, showToastSuccess } from '../../../utils/func'
+import { cloudRequest } from '../../../utils/request'
 
 // miniprogram/pages/openapi/cloudid/cloudid.js
 Page({
@@ -20,7 +21,8 @@ Page({
     wx.getWeRunData({
       success: res => {
         console.log('run', res)
-        wx.cloud.callFunction({
+        cloudRequest({
+          loading: true,
           // 1.
           // name: 'echo',
           // data: {
@@ -39,7 +41,7 @@ Page({
             },
           },
         }).then(res => {
-          this.setData({ weRunResult: JSON.stringify(res.result) })
+          this.setData({ weRunResult: JSON.stringify(res) })
           showToastSuccess('敏感数据获取成功')
           console.log('[onGetWeRunData] 收到 echo 回包：', res)
         }).catch(err => {
@@ -51,7 +53,8 @@ Page({
   },
 
   onGetUserInfo (e) {
-    wx.cloud.callFunction({
+    cloudRequest({
+      loading: true,
       // 1.
       name: 'echo',
       data: {
@@ -71,15 +74,9 @@ Page({
       // }
 
     }).then(res => {
+      this.setData({ userInfoResult: JSON.stringify(res) })
+      showToastSuccess('敏感数据获取成功')
       console.log('[onGetUserInfo] 调用成功：', res)
-
-      this.setData({
-        userInfoResult: JSON.stringify(res.result),
-      })
-
-      wx.showToast({
-        title: '敏感数据获取成功',
-      })
     })
   },
 })

@@ -1,0 +1,7 @@
+<!-- "navigationBarBackgroundColor": "#d43c33", -->
+<swiper class="banner-swiper" interval="3000" circular vertical="{{false}}" indicator-dots="{{true}}" autoplay="{{true}}">
+  <swiper-item wx:for="{{bannerList}}" wx:key="index">
+    <!-- <image class="banner-image" src="{{item.imageUrl}}" mode="aspectFill"></image> -->
+    <image class="banner-image" src="{{item.img}}" mode="aspectFill"></image>
+  </swiper-item>
+</swiper>
