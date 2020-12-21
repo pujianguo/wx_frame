@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "openapi": []
+  },
+  "triggers": [
+    {
+      "name": "crontab",
+      "type": "time",
+      "config": "0 0 2 * * * *"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { hideRequestLoading, showRequestLoading, showToastError, showToastSuccess } from '../../utils/func'
+import { hideRequestLoading, showModalInfo, showRequestLoading, showToastError, showToastSuccess } from '../../utils/func'
 import { wxChooseImage, wxGetSetting, wxGetUserInfo } from '../../utils/wx'
 const app = getApp()
 
@@ -96,6 +96,28 @@ Page({
     }).catch(_ => {
       showToastError('调用失败')
       console.error('[云函数] [sum] 调用失败：', _)
+    })
+  },
+
+  // 同步音乐Banner
+  syncMusicBanner () {
+    showRequestLoading('同步中...')
+    wx.cloud.callFunction({
+      name: 'crontab',
+      data: {
+        action: 'musicBanner',
+      },
+    }).then(res => {
+      if (!res.result.errCode) {
+        showToastSuccess('同步成功')
+      } else {
+        showModalInfo('同步失败', res.result.errMsg)
+      }
+    }).catch(err => {
+      showToastError('同步失败')
+      console.error('同步失败: ', err)
+    }).finally(_ => {
+      hideRequestLoading()
     })
   },
 })
