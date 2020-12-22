@@ -1,11 +1,28 @@
 <view>
-  <van-cell is-link title="识别银行卡" bind:click="onBankcard" />
-  <van-cell is-link title="识别身份证" bind:click="onIdcard" />
+  <van-cell-group title="银行卡">
+    <van-cell is-link title="识别银行卡" bind:click="onBankcard" />
+    <van-cell custom-class="cell-class" title-class="cell-title-class" value-class="cell-value-class"
+      title="银行卡号" value="{{bankcardNumber}}" wx:if="{{bankcardNumber}}">
+      <van-button class="copy-btn" slot="right-icon" type="default" size="small" bind:click="copyBankcard">复制</van-button>
+    </van-cell>
+  </van-cell-group>
 
-  <view wx:if="{{bankcardResult}}">
-    {{bankcardResult}}
-  </view>
-  <view wx:if="{{idcardResult}}">
-    {{idcardResult}}
-  </view>
+  <van-cell-group title="身份证">
+    <van-cell is-link title="识别身份证" bind:click="onIdcard" />
+  </van-cell-group>
+  <van-cell-group title="正面照" wx:if="{{showIdcardFront}}">
+    <block wx:for="{{idcardFrontList}}" wx:key="key">
+      <van-cell custom-class="cell-class" title-class="cell-title-class" value-class="cell-value-class"
+        title="{{item.label}}" value="{{item.value}}">
+        <van-button class="copy-btn" slot="right-icon" type="default" size="small" data-value="{{item.value}}" bind:click="copyIdcard">复制</van-button>
+      </van-cell>
+    </block>
+  </van-cell-group>
+  <van-cell-group title="背面照" wx:if="{{showIdcardBack}}">
+    <block wx:for="{{idcardBackList}}" wx:key="key">
+      <van-cell custom-class="cell-class" title-class="cell-title-class" value-class="cell-value-class" title="{{item.label}}" value="{{item.value}}">
+        <van-button class="copy-btn" slot="right-icon" type="default" size="small" data-value="{{item.value}}" bind:click="copyIdcard">复制</van-button>
+      </van-cell>
+    </block>
+  </van-cell-group>
 </view>
