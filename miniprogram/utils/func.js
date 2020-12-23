@@ -5,6 +5,8 @@
  */
 import config from '../config'
 import store from './store'
+import * as filterConst from '../filter/const'
+import filterFunc from '../filter/func'
 
 // 微信API Promise化
 export const wxPromise = function (api) {
@@ -126,57 +128,39 @@ export const copy = data => {
   return JSON.parse(JSON.stringify(data))
 }
 
-// 结果为字符串
-export const formatDecimals = (value, decimals = 2) => {
-  value = parseFloat(value)
-  if (Number.isNaN(value)) {
-    value = 0
+/* 将const中的数据转化为下拉框选择时可用的数组
+*  isNumber key是否是number类型
+*/
+export const constDataToArray = (obj, firstItem = null, isNumber = false) => {
+  const arr = []
+  if (isNumber) {
+    Object.getOwnPropertyNames(obj).forEach(k => {
+      if (k !== 'default') {
+        arr.push({ value: Number(k), label: obj[k] })
+      }
+    })
+  } else {
+    Object.getOwnPropertyNames(obj).forEach(k => {
+      if (k !== 'default') {
+        arr.push({ value: k, label: obj[k] })
+      }
+    })
   }
-  return value.toFixed(decimals)
-}
-export const formatFloat = (value, decimals = 2) => {
-  return parseFloat(formatDecimals(value, decimals))
-}
-export const formatInt = value => {
-  value = parseInt(value)
-  if (Number.isNaN(value)) {
-    value = 0
-  }
-  return value
-}
-// js保留两位小数，自动补充零, 补0后转换成了字符串
-export const formatMoney = value => {
-  return formatDecimals(value)
+  firstItem && arr.unshift(firstItem)
+  return arr
 }
 
-/** *************** 时间相关 *************** **/
-export const formatMonth = t => {
-  if (t) {
-    const { year, month } = getTimeItem(t)
-    return `${year}-${month}`
+/**
+ * filter过滤器
+ * @param filterName  过滤器名称
+ * @param args 参数
+ */
+export const filter = (filterName, ...args) => {
+  const data = filterConst[`${filterName}Data`]
+  if (data) {
+    return data[args[0]] || data.default
   }
-  return ''
-}
-export const formatDate = t => {
-  if (t) {
-    const { year, month, day } = getTimeItem(t)
-    return `${year}-${month}-${day}`
-  }
-  return ''
-}
-export const formatMinute = t => {
-  if (t) {
-    const { year, month, day, hour, minute } = getTimeItem(t)
-    return `${year}-${month}-${day} ${hour}:${minute}:${second}`
-  }
-  return ''
-}
-export const formatSecond = t => {
-  if (t) {
-    const { year, month, day, hour, minute, second } = getTimeItem(t)
-    return `${year}-${month}-${day} ${hour}:${minute}:${second}`
-  }
-  return ''
+  return filterFunc[filterName] ? filterFunc[filterName](...args) : ''
 }
 
 // 检查是否需要更新小程序
@@ -212,20 +196,4 @@ export function checkUpdateApp () {
       }
     })
   }
-}
-
-const getTimeItem = t => {
-  const date = new Date(t)
-  return {
-    year: date.getFullYear(),
-    month: formatNumber(date.getMonth() + 1),
-    day: formatNumber(date.getDate()),
-    hour: formatNumber(date.getHours()),
-    minute: formatNumber(date.getMinutes()),
-    second: formatNumber(date.getSeconds()),
-  }
-}
-const formatNumber = n => {
-  n = n.toString()
-  return n[1] ? n : '0' + n
 }

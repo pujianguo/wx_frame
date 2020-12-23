@@ -1,4 +1,4 @@
-import { hideRequestLoading, showModalInfo, showRequestLoading, showToastError, showToastSuccess } from '../../utils/func'
+import { filter, hideRequestLoading, showModalInfo, showRequestLoading, showToastError, showToastSuccess } from '../../utils/func'
 import { wxChooseImage, wxGetSetting, wxGetUserInfo } from '../../utils/wx'
 import { cloudRequest } from '../../utils/request'
 
@@ -10,6 +10,8 @@ Page({
     userInfo: {},
     logged: false, // 登录标记
     imgUrl: '',
+    date: filter('minute', new Date()),
+    decimalString: filter('decimalString', 122, 2),
   },
 
   async onLoad () {

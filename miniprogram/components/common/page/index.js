@@ -42,17 +42,17 @@ Component({
       if (this.data.loading || (this.data.currentPage > 0 && this.data.currentPage >= this.data.pages)) {
         return
       }
-      const query = Object.assign({}, this.data.apiObj.query, {
+      const query = Object.assign({
         offset: this.data.currentPage * this.data.size,
         limit: this.data.size,
-      })
+      }, this.data.apiObj.query)
       this.data.loading = true
       this.setFooter()
       wx.showNavigationBarLoading()
       const isShowRequestLoading = !this.data.initLoading && isRefresh
       this.data.apiObj.apiFun(query, isShowRequestLoading).then(res => {
         let list = res.items || []
-        list = list.map(x => this.data.apiObj.initItemFun(x))
+        list = list.map(this.data.apiObj.initItemFun)
         if (!isRefresh) {
           list = this.data.list.concat(list)
         }

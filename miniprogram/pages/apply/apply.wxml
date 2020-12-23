@@ -12,6 +12,10 @@
   <van-cell-group title="常用页面">
     <van-cell is-link title="列表页" link-type="navigateTo" url="/pages/datum/datum" />
   </van-cell-group>
+  <van-cell-group title="过滤器">
+    <van-cell title="日期" value="{{date}}" />
+    <van-cell title="decimalString" value="{{decimalString}}" />
+  </van-cell-group>
 
   <van-cell-group title="登录相关">
     <van-cell is-link title="点击获取 openid" bind:click="onGetOpenid" />
