@@ -1,0 +1,17 @@
+<van-search class="search" use-action-slot placeholder="请输入搜索关键词"
+  shape="round"
+  value="{{searchValue}}"
+  bind:change="onChange"
+  bind:search="onSearch"
+>
+  <view slot="action" bind:tap="onSearch">搜索</view>
+</van-search>
+<view class="scroll-view-wrapper">
+  <scroll-view class="scroll-view" scroll-y>
+    <van-cell wx:for="{{searchList}}" wx:key="id"
+      custom-class="result-item cell-class" title-class="cell-title-class" value-class="cell-value-class"
+      title="{{item.name}}" label="{{item.singer}}-{{item.album}}">
+      <van-button class="copy-btn" slot="right-icon" type="default" size="small" data-id="{{item.id}}" bind:click="handleAdd">添加</van-button>
+    </van-cell>
+  </scroll-view>
+</view>

@@ -6,3 +6,12 @@
   width: 100%;
   height: 280rpx;
 }
+
+.list{
+  margin-top: 30rpx;
+  width: 100%;
+}
+.list-item{
+  display: flex;
+  align-items: center;
+}

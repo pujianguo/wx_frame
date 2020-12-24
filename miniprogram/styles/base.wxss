@@ -2,17 +2,11 @@ view, scroll-view, swiper, swiper-item, button, input, textarea, label, navigato
 	box-sizing: border-box;
 }
 
-/* 普通page页 */
-page {
-  background-color: #FFFFFF;
-  /* font-size: $font-size; */
-  /* color: $text-color; */
+page{
   min-height: 100%;
   display: flex;
-}
-page>view{
-  flex: 1;
-  overflow-y: auto;
+  flex-direction: column;
+  background-color: #FFFFFF;
 }
 
 .g-normal-btn{

@@ -86,6 +86,12 @@
         {
           "name": "pages/music/music",
           "pathName": "pages/music/music",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/music/add/add",
+          "pathName": "pages/music/add/add",
           "scene": null
         }
       ]

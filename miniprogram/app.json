@@ -10,7 +10,7 @@
     "pages/openapi/ocr/ocr",
     "pages/music/music",
     "pages/music/play/play",
-    "pages/music/index/index"
+    "pages/music/add/add"
   ],
   "window": {
     "backgroundTextStyle": "dark",

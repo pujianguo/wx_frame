@@ -1,0 +1,14 @@
+@import '../../../styles/flexpage.wxss';
+
+.search{
+  width: 100%;
+}
+.scroll-view-wrapper{
+  flex: 1;
+}
+.scroll-view{
+  height: 100%;
+}
+.result-item{
+  align-items: center;
+}

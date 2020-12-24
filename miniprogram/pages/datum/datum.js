@@ -25,10 +25,7 @@ Page({
     apiObj: {
       query: {},
       apiFun: listDatumMock,
-      initItemFun: item => {
-        item.hasGet = false
-        return item
-      },
+      initItemFun: null,
     },
   },
   state: {

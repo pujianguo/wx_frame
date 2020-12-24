@@ -1,8 +1,6 @@
 {
-  "navigationBarTitleText": "a",
-  "enablePullDownRefresh": true,
   "usingComponents": {
-    "page": "/components/common/page/index",
+    "van-search": "@vant/weapp/search/index",
     "van-cell": "@vant/weapp/cell/index",
     "van-button": "@vant/weapp/button/index"
   }

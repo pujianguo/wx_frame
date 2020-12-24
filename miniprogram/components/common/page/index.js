@@ -52,7 +52,7 @@ Component({
       const isShowRequestLoading = !this.data.initLoading && isRefresh
       this.data.apiObj.apiFun(query, isShowRequestLoading).then(res => {
         let list = res.items || []
-        list = list.map(this.data.apiObj.initItemFun)
+        list = this.data.apiObj.initItemFun && list.map(this.data.apiObj.initItemFun)
         if (!isRefresh) {
           list = this.data.list.concat(list)
         }
@@ -61,6 +61,7 @@ Component({
         this.data.pages = Math.ceil(res.count / this.data.size)
         this.triggerEvent('refreshList', { list: list })
       }).catch(_ => {
+        console.log('page err', _)
       }).finally(_ => {
         if (this.data.initLoading) {
           this.data.initLoading = false

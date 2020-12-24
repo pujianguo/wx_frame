@@ -5,3 +5,15 @@
     <image class="banner-image" src="{{item.img}}" mode="aspectFill"></image>
   </swiper-item>
 </swiper>
+
+<view class="list">
+  <van-cell wx:for="{{list}}" wx:key="id"
+    custom-class="list-item cell-class" title-class="cell-title-class" value-class="cell-value-class"
+    title="{{item.name}}" label="{{item.singer}}-{{item.album}}">
+    <van-button class="copy-btn" slot="right-icon" type="default" size="small" data-id="{{item.id}}" bind:click="handlePlay">播放</van-button>
+  </van-cell>
+</view>
+
+<!-- 分页 -->
+<page refreshFlag="{{refreshFlag}}" loadMoreFlag="{{loadMoreFlag}}" apiObj="{{apiObj}}"
+    bind:refreshList="bindRefreshList" bind:closeInitLoading="bindCloseInitLoading"></page>
