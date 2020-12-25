@@ -10,7 +10,8 @@
   </view>
 
   <van-cell-group title="常用页面">
-    <van-cell is-link title="列表页" link-type="navigateTo" url="/pages/datum/datum" />
+    <van-cell is-link title="列表页-分页逻辑在page组件" link-type="navigateTo" url="/pages/datum/datum" />
+    <van-cell is-link title="列表页-分页逻辑在PaginationPage构造器中" link-type="navigateTo" url="/pages/datum2/datum" />
   </van-cell-group>
   <van-cell-group title="过滤器">
     <van-cell title="日期" value="{{date}}" />

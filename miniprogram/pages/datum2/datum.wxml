@@ -60,9 +60,8 @@
 
 <datum-list class="datum-list" list="{{list}}"></datum-list>
 
-<!-- 分页 -->
-<page refreshFlag="{{refreshFlag}}" loadMoreFlag="{{loadMoreFlag}}" apiObj="{{apiObj}}"
-  bind:refreshList="bindRefreshList" bind:closeInitLoading="bindCloseInitLoading"></page>
+<!-- 分页展示 -->
+<page-footer show-loading="{{isShowFooterLoading}}" show-no-more="{{isShowFooterNoMore}}" />
 
 <button class="g-normal-btn contact" hover-class="none" open-type="contact">
   <image class="contact-image" src="/images/datum/contact_btn.png" mode="aspectFill"></image>

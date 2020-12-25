@@ -52,7 +52,9 @@ Component({
       const isShowRequestLoading = !this.data.initLoading && isRefresh
       this.data.apiObj.apiFun(query, isShowRequestLoading).then(res => {
         let list = res.items || []
-        list = this.data.apiObj.initItemFun && list.map(this.data.apiObj.initItemFun)
+        if (this.data.apiObj.initItemFun) {
+          list = list.map(this.data.apiObj.initItemFun)
+        }
         if (!isRefresh) {
           list = this.data.list.concat(list)
         }

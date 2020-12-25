@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "资料",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "page-footer": "/components/common/page-footer/index",
+    "datum-list": "/components/datum/list/index"
+  }
+}

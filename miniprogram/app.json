@@ -3,6 +3,7 @@
     "pages/apply/apply",
     "pages/index/index",
     "pages/datum/datum",
+    "pages/datum2/datum",
     "pages/about/about",
     "pages/openapi/serverapi/serverapi",
     "pages/openapi/callback/callback",
