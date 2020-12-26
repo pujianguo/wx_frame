@@ -98,6 +98,12 @@
         {
           "name": "pages/datum/datum",
           "pathName": "pages/datum/datum",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/music/add/add",
+          "pathName": "pages/music/add/add",
           "scene": null
         }
       ]

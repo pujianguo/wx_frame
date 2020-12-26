@@ -12,7 +12,7 @@ import { showRequestLoading, hideRequestLoading, showRequestError, checkTokenToL
  * loading 展示loading
  *    1. boolean: 是否；2. string: 展示内容
  * hideErrorInfo 不展示错误信息，
- *    默认展示，设置 false 不展示，可自己处理错误
+ *    默认展示，设置 true 不展示，可自己处理错误
  */
 export const cloudRequest = function (data) {
   data.loading && showRequestLoading(data.loading)
@@ -38,7 +38,11 @@ export const cloudRequest = function (data) {
   })
 }
 
-const httpRequest = function (url, method, data, needAuth = true, loading = true) {
+const httpRequest = function (params) {
+  const { url, method, data, loading, showErrorInfo, needAuth } = Object.assign({
+    showErrorInfo: true,
+    needAuth: true,
+  }, params)
   const header = {
     'Content-Type': 'application/json',
   }
@@ -61,7 +65,7 @@ const httpRequest = function (url, method, data, needAuth = true, loading = true
       success: res => {
         if (res.statusCode >= 400) {
           const msg = getResponseError(res)
-          showRequestError(msg)
+          showErrorInfo && showRequestError(msg)
           reject(msg)
         } else {
           resolve(res.data)
@@ -97,27 +101,28 @@ const getResponseError = res => {
 }
 
 /** ******************** http请求相关 ******************** **/
-export const _publicGet = function (url, data = {}, loading = true) {
-  const fullUrl = config.baseUrl + url
-  return httpRequest(fullUrl, 'GET', data, false, loading)
+export const _publicGet = function (url, data = {}, loading = true, showErrorInfo = true) {
+  url = config.baseUrl + url
+  return httpRequest({ url, data, loading, showErrorInfo, method: 'GET', needAuth: false })
 }
-export const _get = function (url, data = {}, loading = true) {
-  const fullUrl = config.baseUrl + url
-  return httpRequest(fullUrl, 'GET', data, true, loading)
+export const _get = function (url, data = {}, loading = true, showErrorInfo = true) {
+  url = config.baseUrl + url
+  return httpRequest({ url, data, loading, showErrorInfo, method: 'GET' })
 }
-export const _publicPost = function (url, data = {}, loading = true) {
-  const fullUrl = config.baseUrl + url
-  return httpRequest(fullUrl, 'POST', data, false, loading)
+export const _publicPost = function (url, data, loading = true, showErrorInfo = true) {
+  url = config.baseUrl + url
+  return httpRequest({ url, data, loading, showErrorInfo, method: 'POST', needAuth: false })
 }
-export const _post = function (url, data = {}, loading = true) {
-  const fullUrl = config.baseUrl + url
-  return httpRequest(fullUrl, 'POST', data, true, loading)
+
+export const _post = function (url, data = {}, loading = true, showErrorInfo = true) {
+  url = config.baseUrl + url
+  return httpRequest({ url, data, loading, showErrorInfo, method: 'POST' })
 }
-export const _put = function (url, data = {}, loading = true) {
-  const fullUrl = config.baseUrl + url
-  return httpRequest(fullUrl, 'PUT', data, true, loading)
+export const _put = function (url, data = {}, loading = true, showErrorInfo = true) {
+  url = config.baseUrl + url
+  return httpRequest({ url, data, loading, showErrorInfo, method: 'PUT' })
 }
-export const _delete = function (url, data = {}, loading = true) {
-  const fullUrl = config.baseUrl + url
-  return httpRequest(fullUrl, 'DELETE', data, true, loading)
+export const _delete = function (url, data = {}, loading = true, showErrorInfo = true) {
+  url = config.baseUrl + url
+  return httpRequest({ url, data, loading, showErrorInfo, method: 'DELETE' })
 }

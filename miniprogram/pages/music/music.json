@@ -1,5 +1,6 @@
 {
-  "navigationBarTitleText": "a",
+  "navigationBarTitleText": "音乐",
+  "navigationBarBackgroundColor": "#d43c33",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "page": "/components/common/page/index",

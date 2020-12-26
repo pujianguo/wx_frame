@@ -1,4 +1,6 @@
 {
+  "navigationBarTitleText": "添加音乐",
+  "navigationBarBackgroundColor": "#d43c33",
   "usingComponents": {
     "van-search": "@vant/weapp/search/index",
     "van-cell": "@vant/weapp/cell/index",
