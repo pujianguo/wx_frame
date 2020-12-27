@@ -1,0 +1,3 @@
+<view class="list">
+  <item-list list="{{list}}" />
+</view>

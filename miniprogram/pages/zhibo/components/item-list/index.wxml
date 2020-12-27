@@ -1,0 +1,18 @@
+<view class="item-list">
+  <view class="item" wx:for="{{list}}" wx:key="index" data-index="{{index}}" bind:tap="openHref">
+    <text class="time">{{item.time}}</text>
+    <text class="mini-type">{{item.miniType}}</text>
+    <text class="team team-a">{{item.team_a}}</text>
+    <text class="vs">VS</text>
+    <text class="team team-b">{{item.team_b}}</text>
+    <!-- <text class="link" data-index="{{index}}" bind:tap="openHref">地址</text> -->
+  </view>
+</view>
+
+<van-action-sheet
+  title="点击可复制直播地址"
+  show="{{ show }}"
+  actions="{{ actions }}"
+  bind:select="onSelect"
+  bind:close="onClose"
+/>

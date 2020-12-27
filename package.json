@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vant/weapp": "^1.6.3"
+    "@vant/weapp": "^1.6.4"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

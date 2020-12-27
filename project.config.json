@@ -47,6 +47,7 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "compileType": "miniprogram",
   "condition": {
     "plugin": {
       "list": []
@@ -104,6 +105,18 @@
         {
           "name": "pages/music/add/add",
           "pathName": "pages/music/add/add",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/zhibo/zhibo",
+          "pathName": "pages/zhibo/zhibo",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/zhibo/dongqiudi/dongqiudi",
+          "pathName": "pages/zhibo/dongqiudi/dongqiudi",
           "scene": null
         }
       ]

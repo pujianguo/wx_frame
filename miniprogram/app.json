@@ -11,7 +11,9 @@
     "pages/openapi/ocr/ocr",
     "pages/music/music",
     "pages/music/play/play",
-    "pages/music/add/add"
+    "pages/music/add/add",
+    "pages/zhibo/zhibo",
+    "pages/zhibo/dongqiudi/dongqiudi"
   ],
   "window": {
     "backgroundTextStyle": "dark",

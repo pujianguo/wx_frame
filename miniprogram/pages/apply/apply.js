@@ -113,4 +113,5 @@ Page({
       showModalInfo('同步失败', err.errMsg)
     })
   },
+
 })

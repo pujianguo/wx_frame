@@ -1,0 +1,28 @@
+<view class="item-list">
+  <view class="item" wx:for="{{list}}" wx:key="index">
+    <view class="item-title">
+      <text class="time">{{item.time}}</text>
+      <text class="match-title">{{item.match_title}}</text>
+    </view>
+    <view class="item-content">
+      <text class="team-name team-name-a">{{item.team_a_name}}</text>
+      <image class="team-logo" src="{{item.team_a_logo}}"></image>
+      <block wx:if="{{item.status === 'Fixture'}}">
+        <text class="vs">VS</text>
+      </block>
+      <block wx:else>
+        <text class="vs {{item.status === 'Playing'?'vs-playing':''}}"> {{item.fs_a}} - {{item.fs_b}} </text>
+      </block>
+      <image class="team-logo" src="{{item.team_b_logo}}"></image>
+      <text class="team-name team-name-b">{{item.team_b_name}}</text>
+    </view>
+    <view class="item-footer" wx:if="{{item.status !== 'Fixture'}}">
+      <block wx:if="{{item.status === 'Played'}}">
+        <text class="end">已结束</text>
+      </block>
+      <block wx:else>
+        <text class="minute">{{item.minute}}</text>
+      </block>
+    </view>
+  </view>
+</view>
