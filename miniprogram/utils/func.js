@@ -8,7 +8,12 @@ import store from './store'
 import * as filterConst from '../filter/const'
 import filterFunc from '../filter/func'
 
-// 微信API Promise化
+/**
+ * 微信API Promise化
+ * @param {wxApi} api 微信原生api
+ * @return {Promise} promise对象
+ * @example wxPromise(wx.getSetting)().then(res=>{})
+ */
 export const wxPromise = function (api) {
   return function (options = {}) {
     return new Promise((resolve, reject) => {
@@ -20,8 +25,14 @@ export const wxPromise = function (api) {
   }
 }
 
-/** *************** http请求结果提示相关 *************** **/
-/* 提示框 普通的提示框，根据主题对颜色进行配置 */
+/** *************** 提示框 这里做封装是为了可统一配置主题颜色等 *************** **/
+/**
+ * 普通的提示框
+ * @param {String} title 标题
+ * @param {String} content 内容
+ * @param {Function} callback 点击确定后的回调
+ * @return {void}
+ */
 export const showModal = (title, content, callback) => {
   wx.showModal({
     title: title,
@@ -33,7 +44,13 @@ export const showModal = (title, content, callback) => {
     },
   })
 }
-// 只展示标题，内容，没有操作
+/**
+ * 提示框 只展示标题，内容，确认按钮，没有操作
+ * 点击确认按钮没有操作，关闭提示框
+ * @param {String} title 标题
+ * @param {String} content 内容
+ * @return {void}
+ */
 export const showModalInfo = (title, content) => {
   wx.showModal({
     title: title,
@@ -41,7 +58,13 @@ export const showModalInfo = (title, content) => {
     showCancel: false,
   })
 }
-/* 提示框 有地址跳转 */
+/**
+ * 提示框 只展示内容，确认按钮
+ * 点击确认按钮后跳转到指定页面
+ * @param {String} text 提示内容
+ * @param {String} url 跳转页面地址
+ * @return {void}
+ */
 export const showWarningAndToUrl = (text, url) => {
   wx.showModal({
     content: text,
@@ -51,7 +74,14 @@ export const showWarningAndToUrl = (text, url) => {
     },
   })
 }
-/* 提示框 返回上一级  (进入页面请求失败时会用到))) */
+/**
+ * 提示框 返回上一页
+ * 展示内容 进入页面请求失败时会用到
+ * 点击确认按钮后返回上一页
+ * 点击取消按钮关闭提示框
+ * @param {String} text 提示内容
+ * @return {void}
+ */
 export const showWarningBack = text => {
   wx.showModal({
     content: text,
@@ -60,7 +90,13 @@ export const showWarningBack = text => {
     },
   })
 }
-/* 提示框 表单提交成功 */
+/**
+ * 提示框 只展示确认按钮
+ * 点击确认按钮执行回调函数
+ * @param {String} text 提示内容
+ * @param {Function} callback 点击确定后的回调
+ * @return {void}
+ */
 export const showConfirmBack = (text, callback) => {
   wx.showModal({
     title: '提示',
@@ -71,33 +107,58 @@ export const showConfirmBack = (text, callback) => {
     },
   })
 }
-/* 提示框 无其他操作 */
-export const showWarning = (text, title = '提示信息') => {
-  wx.showModal({ title: title, content: text, showCancel: false })
-}
-/* 自动关闭弹出框 */
-export const showToast = (text) => {
+
+/** *************** Toast 轻提示 *************** **/
+/**
+ * 普通提示
+ * @param {String} text 提示内容
+ * @return {void}
+ */
+export const showToast = text => {
   wx.showToast({ title: text, icon: 'none', duration: 2000 })
 }
-export const showToastSuccess = (text) => {
+/**
+ * 成功提示
+ * @param {String} text 提示内容
+ * @return {void}
+ */
+export const showToastSuccess = text => {
   wx.showToast({ title: text, icon: 'success', duration: 2000 })
 }
-export const showToastError = (text) => {
+/**
+ * 错误提示
+ * @param {String} text 提示内容
+ * @return {void}
+ */
+export const showToastError = text => {
   wx.showToast({ title: text, image: '/images/icons/error.png', duration: 2000 })
 }
 
-/* 打开 请求数据loading弹框 */
-export const showRequestLoading = (title) => {
+/** *************** http请求结果提示相关 *************** **/
+/**
+ * 打开 请求数据loading弹框
+ * @param {Boolean|String} title Boolean值必为True，表示展示默认提示内容；String 为展示内容
+ * @return {void}
+ */
+export const showRequestLoading = title => {
   if (!title || title === true) {
     title = '加载中'
   }
   wx.showLoading({ title: title })
 }
-/* 关闭 请求数据loading弹框 */
+/**
+ * 关闭 请求数据loading弹框
+ * @return {void}
+ */
 export const hideRequestLoading = () => {
   wx.hideLoading()
 }
-/* 请求报错时的提示框 */
+/**
+ * 请求报错时的提示框
+ * 没有取消按钮，点击确认按钮关闭
+ * @param {String} msg 提示内容
+ * @return {void}
+ */
 export const showRequestError = msg => {
   wx.showModal({
     content: msg,
@@ -105,7 +166,11 @@ export const showRequestError = msg => {
   })
 }
 
-// 检测是否登录，没有登录跳到登录页面
+/**
+ * 检测是否登录，没有登录跳到登录页面
+ * 会将当前页面信息带到path中，登录后可获取到 path 中的 page_to_redirect 进行跳转
+ * @return {void}
+ */
 export const checkTokenToLogin = () => {
   if (!store.getToken()) {
     let path = config.loginPath
@@ -123,14 +188,21 @@ export const checkTokenToLogin = () => {
 }
 
 /** *************** 数据相关 *************** **/
-// 拷贝数据
+/**
+ * 深拷贝数据
+ * @param {Object} data 要拷贝的原数据
+ * @return {Object} 拷贝后的数据
+ */
 export const copy = data => {
   return JSON.parse(JSON.stringify(data))
 }
-
-/* 将const中的数据转化为下拉框选择时可用的数组
-*  isNumber key是否是number类型
-*/
+/**
+ * 将const中的数据转化为下拉框选择时可用的数组
+ * @param {Object} obj  const中的数据
+ * @param {Object} firstItem 下拉框第一项，如：{value: '', label: '请选择xxx'}
+ * @param {Boolean} isNumber key是否是number类型
+ * @return {Array} 转换后的数据
+ */
 export const constDataToArray = (obj, firstItem = null, isNumber = false) => {
   const arr = []
   if (isNumber) {
@@ -149,11 +221,11 @@ export const constDataToArray = (obj, firstItem = null, isNumber = false) => {
   firstItem && arr.unshift(firstItem)
   return arr
 }
-
 /**
  * filter过滤器
- * @param filterName  过滤器名称
- * @param args 参数
+ * @param {String} filterName 过滤器名称
+ * @param {Array} args 任意多个参数
+ * @return {String|Number} 转换结果，一般结果为字符串或数字
  */
 export const filter = (filterName, ...args) => {
   const data = filterConst[`${filterName}Data`]
@@ -163,7 +235,36 @@ export const filter = (filterName, ...args) => {
   return filterFunc[filterName] ? filterFunc[filterName](...args) : ''
 }
 
-// 检查是否需要更新小程序
+/** *************** 时间相关 *************** **/
+/**
+ * 获取最近几小时的时间
+ * @param {number} n 最近n小时，负数表示向前
+ * @param {Date|String} t 计算的开始时间，为空时默认取当前时间
+ * @param {string} filterName 最后格式化的filter名称，取值为：month、date、minute、second
+ * @return {String} 计算后的格式化时间
+ */
+export const getRecentHour = (n, t, filterName = 'second') => {
+  const now = t ? (new Date(t)) : new Date()
+  now.setHours(now.getHours() + n)
+  return filter(filterName, now)
+}
+/**
+ * 获取最近几天的时间
+ * @param {number} n 最近n天，负数表示向前
+ * @param {Date|String} t 计算的开始时间，为空时默认取当前时间
+ * @param {string} filterName 最后格式化的filter名称，取值为：month、date、minute、second
+ * @return {String} 计算后的格式化时间
+ */
+export const getRecentDate = (n, t, filterName = 'date') => {
+  const now = t ? (new Date(t)) : new Date()
+  now.setDate(now.getDate() + n)
+  return filter(filterName, now)
+}
+
+/**
+ * 检查是否需要更新小程序
+ * @return {void}
+ */
 export function checkUpdateApp () {
   if (wx.canIUse('getUpdateManager')) {
     const updateManager = wx.getUpdateManager()

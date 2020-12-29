@@ -8,11 +8,11 @@ import config from '../config'
 import { showRequestLoading, hideRequestLoading, showRequestError, checkTokenToLogin } from './func'
 
 /**
+ * 云函数封装
+ * @param {Object} data 参数对象，比云函数默认参数多了两个值：loading、hideErrorInfo
+ * @param {Boolean|String} data.loading Boolean：是否展示加载框；String：加载框展示内容
+ * @param {Boolean} data.hideErrorInfo 是否影藏错误提示，默认展示。设置为true，可自己处理错误
  *
- * loading 展示loading
- *    1. boolean: 是否；2. string: 展示内容
- * hideErrorInfo 不展示错误信息，
- *    默认展示，设置 true 不展示，可自己处理错误
  */
 export const cloudRequest = function (data) {
   data.loading && showRequestLoading(data.loading)
@@ -38,6 +38,17 @@ export const cloudRequest = function (data) {
   })
 }
 
+/**
+ * 请求接口方法
+ * @param {Object} params 参数对象，可结构为以下参数
+ * @param {String} url 接口地址
+ * @param {String} method http方法
+ * @param {Object} data 请求参数
+ * @param {Boolean|String} loading Boolean：是否展示加载框；String：加载框展示内容
+ * @param {Boolean} showErrorInfo 是否展示错误提示，默认展示
+ * @param {Boolean} needAuth 是否需要校验token，默认需要
+ * @return {Promise} Promise对象
+ */
 const httpRequest = function (params) {
   const { url, method, data, loading, showErrorInfo, needAuth } = Object.assign({
     showErrorInfo: true,
@@ -71,7 +82,10 @@ const httpRequest = function (params) {
           resolve(res.data)
         }
       },
-      fail: e => reject(e),
+      fail: e => {
+        showErrorInfo && showRequestError(e)
+        reject(e)
+      },
       complete: () => {
         loading && hideRequestLoading()
       },

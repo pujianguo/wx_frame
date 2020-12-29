@@ -23,6 +23,7 @@ const PaginationPage = (options = {}) => {
       currentPage: 0,
       pages: 0,
       size: 10,
+      showNoMoreMinLength: 10, // 超过n条数据展示没有更多的提示
       ...state,
     },
     // onLoad (...res) {
@@ -88,7 +89,7 @@ const PaginationPage = (options = {}) => {
       if (this.state.loading && this.state.currentPage > 0) {
         isShowFooterLoading = true
       }
-      if (!this.state.loading && this.state.currentPage > 1 && this.state.currentPage === this.state.pages) {
+      if (!this.state.loading && this.data.list.length > this.state.showNoMoreMinLength && this.state.currentPage === this.state.pages) {
         isShowFooterNoMore = true
       }
       this.setData({
