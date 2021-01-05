@@ -1,2 +1,22 @@
-<!--miniprogram/pages/music/play/play.wxml-->
-<text>miniprogram/pages/music/play/play.wxml</text>
+<view class="container"
+  style="background:url({{music.picUrl}}) center/cover no-repeat">
+</view>
+<view class="mark"></view>
+
+<view class="player-info">
+  <view class="player-disc {{playing ? 'play' : ''}}">
+    <image class="player-img rotation {{playing ? '' : 'rotation-paused'}}" src="{{music.picUrl}}"></image>
+  </view>
+</view>
+
+<!-- 进度条 -->
+<view class="progress-bar">
+  <!-- <x-progress-bar bind:musicEnd="onNext" /> -->
+</view>
+
+<!-- 控制面板 -->
+<view class="control">
+  <text class="iconfont icon-shangyiqu101" bind:tap="onPrev"></text>
+  <text class="iconfont {{playing ? 'icon-zanting1' : 'icon-bofang1'}}" bind:tap="togglePlaying"></text>
+  <text class="iconfont icon-xiayiqu101" bind:tap="onNext"></text>
+</view>

@@ -1,7 +1,6 @@
-import { filter, showModalInfo } from '../../../utils/func'
+import { filter, getRecentDate, showModalInfo } from '../../../utils/func'
 import { cloudRequest } from '../../../utils/request'
 
-// miniprogram/pages/zhibo/dongqiudi/dongqiudi.js
 Page({
   data: {
     list: [],
@@ -15,21 +14,11 @@ Page({
   onPullDownRefresh: function () {
     this.getData()
   },
-  getRecentHour: function (n, t) {
-    const now = t ? (new Date(t)) : new Date()
-    now.setHours(now.getHours() + n)
-    return filter('second', now)
-  },
-  getRecentDate: function (n, t) {
-    const now = t ? (new Date(t)) : new Date()
-    now.setDate(now.getDate() + n)
-    return filter('second', now)
-  },
 
   getData () {
     // const start = '2020-12-28 00:00:00'
     // 开始时间好像只能选日期，选时间没有作用
-    const start = this.getRecentDate(-1)
+    const start = getRecentDate(-1)
     cloudRequest({
       loading: true,
       hideErrorInfo: true,
@@ -40,7 +29,6 @@ Page({
         start: start,
       },
     }).then(res => {
-      console.log('res', res)
       this.setData({
         list: res.map(x => {
           x.time = filter('minute', x.start_play)

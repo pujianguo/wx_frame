@@ -1,0 +1,10 @@
+@import "../../styles/skeleton.wxss";
+@import '../../styles/flexpage.wxss';
+
+.search{
+  width: 100%;
+}
+.scroll-view{
+  flex: 1;
+  height: 0;
+}

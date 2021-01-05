@@ -117,6 +117,24 @@
         {
           "name": "pages/zhibo/dongqiudi/dongqiudi",
           "pathName": "pages/zhibo/dongqiudi/dongqiudi",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/music/play/play",
+          "pathName": "pages/music/play/play",
+          "query": "id= 541687281",
+          "scene": null
+        },
+        {
+          "name": "pages/datum3/datum",
+          "pathName": "pages/datum3/datum",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/datum2/datum",
+          "pathName": "pages/datum2/datum",
           "scene": null
         }
       ]

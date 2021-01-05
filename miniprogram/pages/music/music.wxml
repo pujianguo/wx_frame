@@ -15,5 +15,4 @@
 </view>
 
 <!-- 分页 -->
-<page refreshFlag="{{refreshFlag}}" loadMoreFlag="{{loadMoreFlag}}" apiObj="{{apiObj}}"
-    bind:refreshList="bindRefreshList" bind:closeInitLoading="bindCloseInitLoading"></page>
+<page-footer show-loading="{{isShowFooterLoading}}" show-no-more="{{isShowFooterNoMore}}" />

@@ -3,7 +3,7 @@
   "navigationBarBackgroundColor": "#d43c33",
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "page": "/components/common/page/index",
+    "page-footer": "/components/common/page-footer/index",
     "van-cell": "@vant/weapp/cell/index",
     "van-button": "@vant/weapp/button/index"
   }

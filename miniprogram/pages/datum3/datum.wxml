@@ -1,0 +1,22 @@
+<import src="datum.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{initLoading}}" />
+
+<van-search class="search" use-action-slot placeholder="请输入搜索关键词"
+  shape="round"
+  value="{{searchValue}}"
+  bind:change="onChange"
+  bind:search="onSearch"
+>
+</van-search>
+
+<!-- 开启自定义下拉时，bindscrolltoupper="scrollToUpper" 无效 -->
+<!-- 添加 enhanced 属性后，首页下边有一大片空白 -->
+<scroll-view class="scroll-view" scroll-y refresher-enabled
+  refresher-triggered="{{showRefreshLoading}}"
+  bindrefresherrefresh="scrollToUpper"
+  bindscrolltolower="scrollToLower">
+  <datum-list class="datum-list" list="{{list}}"></datum-list>
+
+  <!-- 分页展示 -->
+  <page-footer show-loading="{{isShowFooterLoading}}" show-no-more="{{isShowFooterNoMore}}" />
+</scroll-view>

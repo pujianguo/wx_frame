@@ -1,59 +1,42 @@
 import { cloudRequest } from '../../utils/request'
+import PaginationPage from '../../behaviors/PaginationPage.js'
+import store from '../../utils/store'
+// import store from '../../utils/store'
 
-const getSongList = (query, loading) => {
-  return cloudRequest({
-    loading: loading,
-    name: 'music',
-    data: {
-      ...query,
-      $url: 'songs',
-    },
-  })
-}
-
-Page({
+PaginationPage({
   data: {
     bannerList: [],
-
-    // 分页相关
-    list: [],
-    refreshFlag: false,
-    loadMoreFlag: false,
-    initLoading: true,
-    apiObj: {
-      query: {},
-      apiFun: getSongList,
-      initItemFun: item => {
-        return item
-      },
-    },
   },
 
   onLoad: function (options) {
     this.getBanner()
-  },
-
-  onPullDownRefresh: function () {
-    this.setData({ refreshFlag: !this.data.refreshFlag })
-  },
-
-  onReachBottom: function () {
-    this.setData({ loadMoreFlag: !this.data.loadMoreFlag })
+    this.refreshListData()
   },
 
   onShareAppMessage: function () {},
 
   /** ********** methods ********** **/
-  bindCloseInitLoading () {
-    this.setData({ initLoading: false })
-  },
-  bindRefreshList (e) {
-    console.log('list', e.detail.list[0])
-    this.setData({ list: e.detail.list })
+  // 分页相关
+  getDataHandle (query, loading) {
+    return cloudRequest({
+      loading: loading,
+      name: 'music',
+      data: {
+        ...query,
+        $url: 'songs',
+      },
+    }).then(res => {
+      // return { items: res.items, count: res.count }
+      return res
+    })
   },
 
   handlePlay (e) {
-    console.log('play')
+    const id = e.currentTarget.dataset.id
+    store.setMusicList(this.data.list.map(x => x.id))
+    wx.navigateTo({
+      url: '/pages/music/play/play?id=' + id,
+    })
   },
 
   getBanner () {

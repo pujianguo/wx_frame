@@ -41,8 +41,9 @@ exports.main = async (event, context) => {
       qs: {
         keywords: event.keywords,
       },
+      json: true,
     }).then(res => {
-      res = JSON.parse(res)
+      // res = JSON.parse(res)， 加了参数 `json:true`
       if (res.code === 200) {
         const songs = res.result.songs.slice(0, 50).map(x => {
           return {
@@ -107,18 +108,8 @@ exports.main = async (event, context) => {
 
   // 获取歌曲详情
   app.router('detail', async (ctx, next) => {
-    const infoUrl = `${BASE_URL}/song/detail?ids=${event.id}`
-    const songUrl = `${BASE_URL}/song/url?ids=${event.id}`
-    let [info, song] = await Promise.all([request(infoUrl), request(songUrl)])
-    info = JSON.parse(info).songs[0]
-    song = JSON.parse(song).data[0]
-    ctx.body = {
-      name: info.name,
-      picUrl: info.al.picUrl,
-      url: song.url,
-      singer: info.ar[0].name,
-      alName: info.al.name,
-    }
+    // 可以直接从数据库获取
+    ctx.body = await getMusicDetail(event.id)
   })
 
   return app.serve()

@@ -6,6 +6,7 @@
 
 const TOKEN = 'token'
 const USERINFO = 'userinfo'
+const MUSICLIST = 'music-list'
 
 const setStorage = (key, value) => {
   try {
@@ -40,6 +41,11 @@ export default {
   setUserInfo: value => setStorage(USERINFO, value),
   getUserInfo: () => getStorage(USERINFO),
   rmUserInfo: () => rmStorage(USERINFO),
+
+  // music list
+  setMusicList: value => setStorage(MUSICLIST, value),
+  getMusicList: () => getStorage(MUSICLIST),
+  rmMusicList: () => rmStorage(MUSICLIST),
 
   // clear all
   clearStorage: () => clearStorage,

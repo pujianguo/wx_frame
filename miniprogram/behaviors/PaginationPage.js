@@ -12,6 +12,7 @@ const PaginationPage = (options = {}) => {
     data: {
       isSearch: false, // 没有搜索的页面直接为false
       initLoading: true, // 初始化加载的标识
+      showRefreshLoading: false, // scroll-view 下拉刷新标识
       query: {},
       list: [],
       isShowFooterLoading: false,
@@ -19,6 +20,7 @@ const PaginationPage = (options = {}) => {
       ...data,
     },
     state: {
+      isPage: true, // 滚动是否是页面，scroll-view可设置为false
       loading: false,
       currentPage: 0,
       pages: 0,
@@ -45,6 +47,14 @@ const PaginationPage = (options = {}) => {
         !this.data.isSearch && this.getData()
       }
     },
+    // scroll-view 滑动到顶部
+    scrollToUpper () {
+      !this.data.isSearch && this.refreshListData()
+    },
+    // scroll-view 滑动到底部
+    scrollToLower () {
+      !this.data.isSearch && this.getData()
+    },
 
     refreshListData () {
       this.state.currentPage = 0
@@ -62,6 +72,7 @@ const PaginationPage = (options = {}) => {
       this.setFooter()
       wx.showNavigationBarLoading()
       const isShowRequestLoading = !this.data.initLoading && isRefresh
+      // !this.state.isPage && isRefresh && this.setData({ showRefreshLoading: true }) // 测试发现这里可以不设置；设置了会在首次onLoad时展示出来，需要更多判读，所以不设置
       this.getDataHandle(query, isShowRequestLoading).then(({ items, count }) => {
         let list = items
         if (!isRefresh) {
@@ -78,8 +89,9 @@ const PaginationPage = (options = {}) => {
         }
         this.state.loading = false
         this.setFooter()
-        wx.stopPullDownRefresh()
         wx.hideNavigationBarLoading()
+        wx.stopPullDownRefresh()
+        this.setData({ showRefreshLoading: false })
       })
     },
 

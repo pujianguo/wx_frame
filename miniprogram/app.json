@@ -4,6 +4,7 @@
     "pages/index/index",
     "pages/datum/datum",
     "pages/datum2/datum",
+    "pages/datum3/datum",
     "pages/about/about",
     "pages/openapi/serverapi/serverapi",
     "pages/openapi/callback/callback",
@@ -15,6 +16,7 @@
     "pages/zhibo/zhibo",
     "pages/zhibo/dongqiudi/dongqiudi"
   ],
+  "requiredBackgroundModes": ["audio", "location"],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#2AA8F4",
