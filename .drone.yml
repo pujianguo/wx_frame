@@ -1,0 +1,27 @@
+kind: pipeline
+type: docker
+name: default
+
+clone:
+  depth: 1
+
+steps:
+- name: test
+  image: registry.cn-beijing.aliyuncs.com/wa/node
+  when:
+    event: push
+    branch: test
+  commands:
+    - echo $DRONE_BRANCH $DRONE_COMMIT
+    - make env
+    - make test
+
+- name: release
+  image: registry.cn-beijing.aliyuncs.com/wa/node
+  when:
+    event: push
+    branch: master
+  commands:
+    - echo $DRONE_BRANCH $DRONE_COMMIT
+    - make env
+    - make release
