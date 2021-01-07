@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - 10
+env:
+  global:
+    - CAMPFIRE_TOKEN=123
+# branches:
+#   only:
+#     - master
+install:
+  - npm install
+script:
+  - if [ "$TRAVIS_BRANCH" = "test" ]; then make test; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then make release; fi
+after_success:
+  - echo 'success'
