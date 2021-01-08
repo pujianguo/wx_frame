@@ -1,13 +1,17 @@
 APPID:=wxd9a579680f0a7754
 VERSION=${shell sed -n '1p' VERSION.txt}  # VERSION=${shell cat VERSION.txt 2> /dev/null}
 DESCRIPTION=${shell sed -n '2p' VERSION.txt}
+DEFAULT_ENV=${shell sed -n '6p' ./miniprogram/config.js | sed "s/.*'\([a-z]*\)'.*/\1/g"}
 
 env:
 	npm install
 
 # 测试
 test:
-	sed -i'.bak' '6s/dev/test/' ./miniprogram/config.js
+	echo 'default env is: ' ${DEFAULT_ENV}
+	sed -i'.bak' '6s/${DEFAULT_ENV}/test/' ./miniprogram/config.js\
+		&& echo 'current env is: '\
+		&& sed -n "6p" ./miniprogram/config.js | sed "s/.*'\([a-z]*\)'.*/\1/g"
 	which miniprogram-ci || npm install -g miniprogram-ci
 	miniprogram-ci \
 		upload \
@@ -23,7 +27,11 @@ test:
 
 # 预上线
 pre:
-	sed -i'.bak' '6s/dev/pre/' ./miniprogram/config.js
+	echo 'default env is: ' ${DEFAULT_ENV}
+	sed -i'.bak' '6s/${DEFAULT_ENV}/pre/' ./miniprogram/config.js\
+		&& echo 'current env is: '\
+		&& sed -n "6p" ./miniprogram/config.js | sed "s/.*'\([a-z]*\)'.*/\1/g"
+	echo 'current env is:' ${sed -n "6p" ./miniprogram/config.js | sed "s/.*'\([a-z]*\)'.*/\1/g"}
 	which miniprogram-ci || npm install -g miniprogram-ci
 	miniprogram-ci \
 		upload \
@@ -39,8 +47,10 @@ pre:
 
 # 正式版本
 release:
-	sed -i'.bak' '6s/dev/release/' ./miniprogram/config.js
-	which miniprogram-ci || npm install -g miniprogram-ci
+	echo 'default env is: ' ${DEFAULT_ENV}
+	sed -i'.bak' '6s/${DEFAULT_ENV}/release/' ./miniprogram/config.js\
+		&& echo 'current env is: '\
+		&& sed -n "6p" ./miniprogram/config.js | sed "s/.*'\([a-z]*\)'.*/\1/g"
 	miniprogram-ci \
 		upload \
 		--pp ./ \
@@ -55,6 +65,7 @@ release:
 
 # 只有 preview 模式才能展示二维码
 preview:
+	echo 'default env is: ' ${DEFAULT_ENV}
 	which miniprogram-ci || npm install -g miniprogram-ci
 	miniprogram-ci \
 		preview \
