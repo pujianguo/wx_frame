@@ -197,13 +197,27 @@
 }
 
 /* 客服 */
-.contact{
+.movable-area{
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
   position: fixed;
-  right: 18rpx;
-  bottom: 21rpx;
+  top: 0;
+  left: 0;
+  right: 20rpx;
+  bottom: 20rpx;
+  z-index: 100;
+
+}
+.movable-view{
+  pointer-events: auto;
+  width: 213rpx;
+  height: 173rpx;
+  z-index: 100;
+}
+.contact{
   width: 193rpx;
   height: 153rpx;
-  z-index: 1;
 }
 .contact-image{
   width: 193rpx;

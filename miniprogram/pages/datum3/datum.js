@@ -39,10 +39,10 @@ PaginationPage({
     console.log('abort')
   },
 
-  onChange (e) {
+  searchValueChange (e) {
     this.setData({ searchValue: e.detail })
   },
-  onSearch () {
+  searchHandle () {
     console.log('value', this.data.searchValue)
   },
 })

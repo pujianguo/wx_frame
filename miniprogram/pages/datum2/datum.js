@@ -20,6 +20,7 @@ PaginationPage({
   },
   state: {
     menuTop: 0,
+    showNoMoreMinLength: 5,
   },
 
   onLoad: function (options) {

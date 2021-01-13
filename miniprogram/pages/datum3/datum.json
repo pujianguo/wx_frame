@@ -3,6 +3,7 @@
   "usingComponents": {
     "van-search": "@vant/weapp/search/index",
     "page-footer": "/components/common/page-footer/index",
+    "empty-box": "/components/common/empty-box/index",
     "datum-list": "/components/datum/list/index"
   }
 }

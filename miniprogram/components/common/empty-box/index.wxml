@@ -1,0 +1,4 @@
+<view class="variables-container empty-box">
+  <image class="empty-box-image" src="{{imageSrc}}" style="margin-top: {{marginTop}};"></image>
+  <text class="empty-box-text">{{title}}</text>
+</view>

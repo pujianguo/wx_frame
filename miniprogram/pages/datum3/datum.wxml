@@ -4,18 +4,24 @@
 <van-search class="search" use-action-slot placeholder="请输入搜索关键词"
   shape="round"
   value="{{searchValue}}"
-  bind:change="onChange"
-  bind:search="onSearch"
+  bind:change="searchValueChange"
+  bind:search="searchHandle"
 >
 </van-search>
 
 <!-- 开启自定义下拉时，bindscrolltoupper="scrollToUpper" 无效 -->
 <!-- 添加 enhanced 属性后，首页下边有一大片空白 -->
-<scroll-view class="scroll-view" scroll-y refresher-enabled
+<!-- empty居中，所以 scroll-view需要设置display:flex, 但是必须要有enable-flex属性时，display:flex才能生效 -->
+<scroll-view class="scroll-view" scroll-y refresher-enabled enable-flex
   refresher-triggered="{{showRefreshLoading}}"
   bindrefresherrefresh="scrollToUpper"
   bindscrolltolower="scrollToLower">
-  <datum-list class="datum-list" list="{{list}}"></datum-list>
+  <block wx:if="{{list.length}}">
+    <datum-list list="{{list}}"></datum-list>
+  </block>
+  <block wx:else>
+    <empty-box margin-top="-30%"></empty-box>
+  </block>
 
   <!-- 分页展示 -->
   <page-footer show-loading="{{isShowFooterLoading}}" show-no-more="{{isShowFooterNoMore}}" />

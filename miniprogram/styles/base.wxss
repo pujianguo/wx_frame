@@ -9,6 +9,8 @@ page{
   background-color: #FFFFFF;
 }
 
+/* ************************* 按钮相关 ************************* */
+/* 去掉默认边框信息的按钮 */
 .g-normal-btn{
   background-color: transparent;
   margin: 0;
@@ -20,6 +22,7 @@ page{
   border: none;
 }
 
+/* ************************* other ************************* */
 /* iphonex 底部边距 */
 .g-iphonex-margin-bottom{
   margin-bottom: 48rpx;

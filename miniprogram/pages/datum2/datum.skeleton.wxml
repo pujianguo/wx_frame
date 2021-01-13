@@ -19,31 +19,7 @@
       </view>
       <view is="components/datum/list/index" class="datum-list">
         <view class="list-index--list">
-          <view class="list-index--list-item" style="border: none;">
-            <view class="list-index--item-image sk-shine"></view>
-            <view class="list-index--item-body">
-              <view class="list-index--item-title sk-shine"></view>
-              <view class="list-index--item-content sk-shine" style="height: 30rpx;width: 240rpx"></view>
-            </view>
-            <view class="list-index--item-btn sk-shine"></view>
-          </view>
-          <view class="list-index--list-item" style="border: none;">
-            <view class="list-index--item-image sk-shine"></view>
-            <view class="list-index--item-body">
-              <view class="list-index--item-title sk-shine"></view>
-              <view class="list-index--item-content sk-shine" style="height: 30rpx;width: 240rpx"></view>
-            </view>
-            <view class="list-index--item-btn sk-shine"></view>
-          </view>
-          <view class="list-index--list-item" style="border: none;">
-            <view class="list-index--item-image sk-shine"></view>
-            <view class="list-index--item-body">
-              <view class="list-index--item-title sk-shine"></view>
-              <view class="list-index--item-content sk-shine" style="height: 30rpx;width: 240rpx"></view>
-            </view>
-            <view class="list-index--item-btn sk-shine"></view>
-          </view>
-          <view class="list-index--list-item" style="border: none;">
+          <view class="list-index--list-item" style="border: none;" wx:for="{{8}}" wx:key="index">
             <view class="list-index--item-image sk-shine"></view>
             <view class="list-index--item-body">
               <view class="list-index--item-title sk-shine"></view>

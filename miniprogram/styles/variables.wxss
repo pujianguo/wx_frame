@@ -1,0 +1,22 @@
+.variables-container{
+  /* 文字基本颜色 */
+  --text-color-title: #404040;
+  --text-color: #7b7b7b;
+  --text-color-description: #9e9e9e;
+  --text-color-placeholder: #cecece;
+  --text-color-disabled: #9e9e9e;
+
+  /* 背景颜色 */
+  --bg-color: #ffffff;
+  --bg-color-page: #f0f0f0;
+  --bg-color-card: #ffffff;
+  --bg-color-grey: #f8f8f8;
+  /* 点击状态颜色 */
+  --bg-color-active: #f8f8f8;
+  /* 遮罩颜色 */
+  --bg-color-mask: rgba(0, 0, 0, .6);
+
+  /* 边框颜色 */
+  --color-border: #f0f0f0;
+  --color-border-dark: #dfdfdf;
+}

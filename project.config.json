@@ -43,7 +43,7 @@
   },
   "appid": "wxd9a579680f0a7754",
   "projectname": "wx-frame",
-  "libVersion": "2.8.1",
+  "libVersion": "2.14.3",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",

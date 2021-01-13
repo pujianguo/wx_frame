@@ -1,4 +1,4 @@
-<view class="page-footer" wx:if="{{showLoading || showNoMore}}">
+<view class="variables-container page-footer" wx:if="{{showLoading || showNoMore}}">
   <view class="loading" wx:if="{{showLoading}}">
     <image class="loading-icon" src="/images/icons/loading.png"></image>
     <text class="loading-text">正在加载</text>

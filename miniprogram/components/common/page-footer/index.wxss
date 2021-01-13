@@ -1,7 +1,9 @@
+@import '../../../styles/variables.wxss';
+
 .page-footer{
   width: 100%;
   padding: 10rpx 0;
-  color: rgb(150 151 153);
+  color: var(--text-color-description);
   font-size: 24rpx;
 }
 .loading{
@@ -25,7 +27,7 @@
 .no-more-line{
   flex: 1;
   height: 1px;
-  background-color: rgb(235 237 240);
+  background-color: var(--color-border);
 }
 .no-more-text{
   padding: 0 50rpx;

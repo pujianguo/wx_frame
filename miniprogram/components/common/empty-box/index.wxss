@@ -1,0 +1,21 @@
+@import '../../../styles/variables.wxss';
+
+.empty-box{
+  flex: 1;
+  height: 0;
+  padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.empty-box-image{
+  width: 543rpx;
+  height: 303rpx;
+}
+.empty-box-text{
+  margin-top: 10px;
+  text-align: center;
+  color: var(--text-color-description);
+  font-size: 28rpx;
+}

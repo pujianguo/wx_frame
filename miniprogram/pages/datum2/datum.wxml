@@ -58,11 +58,18 @@
   </scroll-view>
 </view>
 
-<datum-list class="datum-list" list="{{list}}"></datum-list>
+<block wx:if="{{list.length}}">
+  <datum-list class="datum-list" list="{{list}}"></datum-list>
+</block>
+<block wx:else>
+  <empty-box></empty-box>
+</block>
 
-<!-- 分页展示 -->
-<page-footer show-loading="{{isShowFooterLoading}}" show-no-more="{{isShowFooterNoMore}}" />
-
-<button class="g-normal-btn contact" hover-class="none" open-type="contact">
-  <image class="contact-image" src="/images/datum/contact_btn.png" mode="aspectFill"></image>
-</button>
+<!-- 客服按钮 -->
+<movable-area class="movable-area">
+  <movable-view class="movable-view" direction="vertical" x="1000" y="1500">
+    <button class="g-normal-btn contact" hover-class="none" open-type="contact">
+      <image class="contact-image" src="/images/datum/contact_btn.png" mode="aspectFill"></image>
+    </button>
+  </movable-view>
+</movable-area>

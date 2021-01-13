@@ -2,48 +2,9 @@
   <view class="sk-container" catch:touchmove>
     <view>
       <view class="banner sk-shine"></view>
-      <view class="header">
-        <view class="header-title sk-text sk-shine">资料专区</view>
-        <view class="header-btn sk-button sk-shine"></view>
-      </view>
-      <view class="menu" id="menu" style="border: none;">
-        <view class="menu-item">
-          <text class="menu-item-title sk-text sk-shine">全部地区</text>
-        </view>
-        <view class="menu-item">
-          <text class="menu-item-title sk-text sk-shine">全部银行</text>
-        </view>
-        <view class="menu-item">
-          <text class="menu-item-title sk-text sk-shine">资料分类</text>
-        </view>
-      </view>
       <view is="components/datum/list/index" class="datum-list">
         <view class="list-index--list">
-          <view class="list-index--list-item" style="border: none;">
-            <view class="list-index--item-image sk-shine"></view>
-            <view class="list-index--item-body">
-              <view class="list-index--item-title sk-shine"></view>
-              <view class="list-index--item-content sk-shine" style="height: 30rpx;width: 240rpx"></view>
-            </view>
-            <view class="list-index--item-btn sk-shine"></view>
-          </view>
-          <view class="list-index--list-item" style="border: none;">
-            <view class="list-index--item-image sk-shine"></view>
-            <view class="list-index--item-body">
-              <view class="list-index--item-title sk-shine"></view>
-              <view class="list-index--item-content sk-shine" style="height: 30rpx;width: 240rpx"></view>
-            </view>
-            <view class="list-index--item-btn sk-shine"></view>
-          </view>
-          <view class="list-index--list-item" style="border: none;">
-            <view class="list-index--item-image sk-shine"></view>
-            <view class="list-index--item-body">
-              <view class="list-index--item-title sk-shine"></view>
-              <view class="list-index--item-content sk-shine" style="height: 30rpx;width: 240rpx"></view>
-            </view>
-            <view class="list-index--item-btn sk-shine"></view>
-          </view>
-          <view class="list-index--list-item" style="border: none;">
+          <view class="list-index--list-item" style="border: none;" wx:for="{{8}}" wx:key="index">
             <view class="list-index--item-image sk-shine"></view>
             <view class="list-index--item-body">
               <view class="list-index--item-title sk-shine"></view>
