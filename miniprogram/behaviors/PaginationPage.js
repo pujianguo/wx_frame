@@ -44,7 +44,7 @@ const PaginationPage = (options = {}) => {
       if (onReachBottom) { // 页面中重写
         onReachBottom.apply(this)
       } else {
-        !this.data.isSearch && this.getData()
+        !this.data.isSearch && this.getListData()
       }
     },
     // scroll-view 滑动到顶部
@@ -53,14 +53,14 @@ const PaginationPage = (options = {}) => {
     },
     // scroll-view 滑动到底部
     scrollToLower () {
-      !this.data.isSearch && this.getData()
+      !this.data.isSearch && this.getListData()
     },
 
     refreshListData () {
       this.state.currentPage = 0
-      this.getData(true)
+      this.getListData(true)
     },
-    getData (isRefresh = false) {
+    getListData (isRefresh = false) {
       if (this.state.loading || (this.state.currentPage > 0 && this.state.currentPage >= this.state.pages)) {
         return
       }

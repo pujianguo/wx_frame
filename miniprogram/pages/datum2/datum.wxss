@@ -207,7 +207,6 @@
   right: 20rpx;
   bottom: 20rpx;
   z-index: 100;
-
 }
 .movable-view{
   pointer-events: auto;

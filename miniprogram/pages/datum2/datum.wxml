@@ -65,6 +65,9 @@
   <empty-box></empty-box>
 </block>
 
+<!-- 分页展示 -->
+<page-footer show-loading="{{isShowFooterLoading}}" show-no-more="{{isShowFooterNoMore}}" />
+
 <!-- 客服按钮 -->
 <movable-area class="movable-area">
   <movable-view class="movable-view" direction="vertical" x="1000" y="1500">
