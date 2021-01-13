@@ -2,7 +2,7 @@
   "miniprogramRoot": "miniprogram/",
   "cloudfunctionRoot": "cloudfunctions/",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
     "enhance": true,
     "postcss": true,
@@ -135,6 +135,13 @@
         {
           "name": "pages/datum2/datum",
           "pathName": "pages/datum2/datum",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/datum-preview/datum-preview",
+          "pathName": "pages/datum-preview/datum-preview",
+          "query": "",
           "scene": null
         }
       ]

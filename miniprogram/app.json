@@ -5,6 +5,7 @@
     "pages/datum/datum",
     "pages/datum2/datum",
     "pages/datum3/datum",
+    "pages/datum-preview/datum-preview",
     "pages/about/about",
     "pages/openapi/serverapi/serverapi",
     "pages/openapi/callback/callback",
