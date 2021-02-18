@@ -15,9 +15,13 @@
     "pages/music/play/play",
     "pages/music/add/add",
     "pages/zhibo/zhibo",
-    "pages/zhibo/dongqiudi/dongqiudi"
+    "pages/zhibo/dongqiudi/dongqiudi",
+    "pages/other/tianqi/tianqi"
   ],
-  "requiredBackgroundModes": ["audio", "location"],
+  "requiredBackgroundModes": [
+    "audio",
+    "location"
+  ],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#2AA8F4",

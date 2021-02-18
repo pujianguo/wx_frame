@@ -1,0 +1,13 @@
+.copy-btn{
+  margin-left: 20rpx;
+}
+
+.cell-class{
+  align-items: center;
+}
+.cell-title-class{
+  flex: 0 0 200rpx !important;
+}
+.cell-value-class{
+  text-align: left !important;
+}

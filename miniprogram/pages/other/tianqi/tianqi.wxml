@@ -1,0 +1,12 @@
+<view>
+  <van-cell-group title="天气">
+    <van-cell is-link title="北京" data-city='beijing/beijing' bind:click="onClick" />
+    <van-cell is-link title="西安" data-city='shaanxi/xian' bind:click="onClick" />
+    <van-cell is-link title="兰州" data-city='gansu/lanzhou' bind:click="onClick" />
+
+    <van-cell custom-class="cell-class" title-class="cell-title-class" value-class="cell-value-class"
+      title="" value="{{text}}" wx:if="{{text}}">
+      <van-button class="copy-btn" slot="right-icon" type="default" size="small" bind:click="copyText">复制</van-button>
+    </van-cell>
+  </van-cell-group>
+</view>

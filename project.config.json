@@ -143,6 +143,11 @@
           "pathName": "pages/datum-preview/datum-preview",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "天气",
+          "pathName": "pages/other/tianqi/tianqi",
+          "scene": null
         }
       ]
     }
